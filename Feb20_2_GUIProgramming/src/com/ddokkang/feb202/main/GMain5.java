@@ -40,6 +40,9 @@ public class GMain5 {
 		JButton action = new JButton("Action");
 		jf.add(action);
 		
+		// button 병합하는 방법
+		// https://itdeveloper.tistory.com/20
+		
 		CharacterFrame ch = new CharacterFrame(levelTf, expTf, levelResultLb, expResultLb, resultLb);
 		action.addActionListener(ch);
 		

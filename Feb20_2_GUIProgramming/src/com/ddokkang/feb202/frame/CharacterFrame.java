@@ -13,7 +13,7 @@ public class CharacterFrame implements ActionListener {
 	private JLabel lvlb;
 	private JLabel explb;
 	private JLabel rlb;
-	
+
 	public CharacterFrame() {
 		// TODO Auto-generated constructor stub
 	}
@@ -33,16 +33,15 @@ public class CharacterFrame implements ActionListener {
 		double exp = Double.parseDouble(exptf.getText());
 		if (exp >= 100) {
 			lv++;
-			exp = Math.abs(100 - exp); 
+			exp = (100 - exp);
 		}
-		
-		
+
 		String lvs = new DecimalFormat("###").format(lv);
 		lvlb.setText(lvs);
 		String exps = new DecimalFormat("##.##").format(exp);
 		explb.setText(exps);
 		String result = String.format("Level : %s, Exp : %s", lv, exp);
 		rlb.setText(result);
-		
+
 	}
 }
