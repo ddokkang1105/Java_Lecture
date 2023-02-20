@@ -1,0 +1,6 @@
+20230210
+PMain1.java
+-> boolean 함수 다시보기!
+
+PMain3.java
+-> 주사위 게임 main에 만드는 코드 다시 훑어보기!
