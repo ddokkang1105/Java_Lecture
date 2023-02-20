@@ -1,0 +1,185 @@
+// Export 하는법
+// 해당 클래스 우클릭 -> Export -> run 검색 -> runnable JAR file 선택
+// 해당 클래스와 경로 선택 후 Launch
+// 메모장으로 java	-jar	파일이름.jar -> .bat 파일로 만들기(파일-모든형식)
+// jar파일이 있는 경로에 bat 파일 넣어서 실행하기
+
+// 컴퓨터의 장치 !
+// CPU / RAM / HDD / GPU
+		
+// CPU : 연산장치(Intel, AMD)
+// HDD(SSD) : 파일 형태로 저장하는 장치
+//		-> 영구적으로 저장
+// RAM : 변수 형태로 저장하는 장치
+//		-> 임시적으로 저장
+// GPU : 그래픽처리 or (CPU + HDD + RAM)
+		
+// 데이터를 임시보존 -> RAM에 변수로 저장 !
+// 데이터를 영구보존 -> HDD에 파일로 저장 !
+
+// 변수 -> 데이터를 저장하는 공간(그릇)
+// 왜 저장하냐? 나중에 쓸 때 부르려고
+
+// 변수를 선언함으로 RAM에 공간을 확보
+// 변수 선언 후에 변수에 값을 넣어서 초기화시킨다.
+//		-> 초기화 시키기 전에는 쓰레기 값이 들어있음
+		
+// 변수명 규칙
+//		1. 숫자로 시작하면 에러 !
+//		2. 특수문자, 띄어쓰기 -> 에러 !
+//		3. 예약어 -> 에러 !
+
+// 자바 문화
+//		4. 다른 사람이 봐도 알 수 있게 변수명 짓기
+//		5. 가독성(_ or 대문자)
+//		6. 한글 X
+
+// Bit : 데이터를 나타내는 최소 단위(이진수)
+// 8 Bit = 1 Byte
+// 8 Bit 의 맨 앞은 부호비트
+//		-> 0 : 양수 / 1 : 음수
+// 8 Bit 의 범위 : 2^(8-1)
+//		-> -1 은 부호비트를 뺀 것
+		
+// 기본형
+//		정수
+//			byte : -128 ~ 127
+//			short : 약 -3만 ~ 3만
+//			int : 약 -21억 ~ 21억
+//			long : int를 벗어나는 범위 
+
+//		실수
+//			float : 다른 언어에서 주로 
+//			double : Java에서 주로
+
+//		문자
+//			char : 한 글자
+
+//		논리
+//			boolean : True / False
+		
+//		없음
+//			void : 'ㅇ벗음' (나중에)
+
+//		참조형
+//			기본형이 아닌 것들은 전부 참조형 !!
+//			문자열
+//				String : 문자열
+
+//	char vs String
+//	char : 한 글자, ' ' 사용
+//	String : 문자열, " " 사용
+
+// double에 int 값을 넣는게 가능 !
+// 넓게 보면 9는 9.0으로도 표현 가능
+
+// Python 에서는 자료형을 알아서 선택해준다.
+// Java 에서나 Python에서나 서로 다른 자료형으로 연산하였을 때
+// 더 큰 자료형으로 자동으로 변환된다.
+
+// ???
+		
+// Stack
+// 프로그램이 종료되면 자동으로 정리
+// 밑에서부터 차곡차곡 쌓이는 형식 <기본형>
+		
+// Heap
+// 	프로그램이 종료되어도 여전히 남아있음
+//		-> 예전에는 수동으로 정리해주어야 했다
+//	컴퓨터가 적당하다고 판단하는 어떠한 위치에 생성함 (주솟값)
+
+// String pool
+// https://2jinishappy.tistory.com/293
+		
+// Garbage Collection (중요 단어)
+// Heap 영역을 자동으로 정리해주는 시스템 !
+
+// 자료형 형변환 찾아보기
+
+// Scanner : Java에 내장되어 있는 기능 중 하나
+// Import 로 불러오기
+
+// Scanner를 사용하기 위한 조건
+// new ~~ : 객체
+
+// 스캐너의 기능 끄기
+(스캐너 변수).close();
+
+// Math.어쩌고 -> 수학 관련 도구
+double cirArea = Math.PI * Math.pow(radius, 2);
+
+====================================================
+
+* 디버깅 한줄씩 하는 방법
+https://itprogramming119.tistory.com/entry/Eclipse-01-%EC%9D%B4%ED%81%B4%EB%A6%BD%EC%8A%A4-%EB%94%94%EB%B2%84%EA%B9%85-%EB%B0%A9%EB%B2%95
+
+// 2진수
+// 0b or 0B 로 시작 
+// ex> 0b10100 -> 20
+int var1 = 0b1011;
+		
+// 8진수
+// 0으로 시작
+// ex> 013 -> 11
+int var2 = 0206;
+		
+// 10진수
+int var3 = 365;
+		
+// 16진수
+// 0x or 0X 로 시작
+// ex> 0x2A0F -> 10767
+int var4 = 0xB3;	
+
+// long 타입 변수에 정수 리터럴을 저장할 때 반드시 L을 붙여야 하나? ->NO !
+// 정수 리터럴이 int 타입의 허용 범위 이내라면 L을 붙이지 않아도 된다.
+// int -> - 2^31 ~ (2^31-1) : 4byte
+// long -> - 2^63 ~ (2^63-1) : 8byte
+
+// 컴파일 에러 -> float 형식에 저장하려면 값 뒤에 f or F 붙이기
+// float var1 = 3.14f;
+
+// 2e-3 -> 2 X 10^(-3)
+// 0.12E-2 -> 0.12 X 10^(-2)
+
+// int x =1;
+// int y = 2;
+// double result = x / y;
+// System.out.println(result);
+// 	-> 0.5 가 아닌 0.0 을 출력
+// 왜 ? -> x , y는 정수이기 때문에 정수로 연산한 후에
+// result에 double로 저장하는 것이기 때문에 !!
+// 해결방법은 ? 
+
+// int x =1;
+// int y = 2;
+// double result = (double) x / y;
+// System.out.println(result);
+OR
+// int x =1;
+// int y = 2;
+// double result = x / (double) y;
+// System.out.println(result);
+OR
+// int x =1;
+// int y = 2;
+// double result = (double) x / (double) y;
+// System.out.println(result);
+
+// 이건 안된다 XX
+// int x =1;
+// int y = 2;
+// double result = (double) (x / y);
+// System.out.println(result);
+// why ? (x / y)가 먼저 연산되기 때문에 !!
+
+// 글자를 자료형으로 바꾸어주는 코드
+int value1 = Integer.parseInt("10");
+double value2 = Double.parseDouble("3.14");
+boolean value3 = Boolean.parseBoolean("true");
+
+// 자료형을 문자형으로 바꾸어주는 코드
+String str1 = String.valueOf(10);
+String str2 = String.valueOf(3.14);
+String str3 = String.valueOf(true);
+
