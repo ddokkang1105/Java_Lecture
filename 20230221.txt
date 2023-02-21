@@ -1,0 +1,249 @@
+// error
+//			한국어 - 번역 -> 영어
+//			사과			apple
+//			바나나			banana
+//			띱퀭			????
+//		Java의 문법에 안 맞게 써서 컴파일이 불가능한 상태
+//		개발자의 잘못 !
+//		완성본은 나오지 않음
+
+// warning
+//		지저분한 코드
+//		개발자의 잘못 !
+//		컴파일은 가능하니 => 완성본은 나옴 ( 실행하는 데 문제 없음 ! )
+//		이클립스가 잔소리를 함...
+//		ex > Scanner 객체 만들고 나서 기능을 안 닫은 경우
+
+// exception
+//		프로그램은 100% 완성 !
+//		실행할 때 뭔가 외부적인 요인에 의해서 작동이 제대로 안되는 상황...
+//		개발자 잘못은 아님
+//		개발자 입장 -> 개발자가 상황을 예측해서 대책은 세워놓자 ...!
+
+// Exception 처리를 할 수 있는 방법 !
+// try-catch !!
+//try {
+//		일단 이 부분을 실행 - (내용)
+//} catch (예외유형명 변수명) {
+//		try쪽을 실행하다가 해당 유형의 Exception이 발생하면 이 부분을 실행
+//		만약, 예외 없이 정상적으로 실행됐을 경우, catch 부분은 그냥 지나치고
+//		그 다음 코드를 진행
+//} finally {
+//		정상적으로 프로그램 실행, 예외 발생 상관없이 실행
+//		return 보다 먼저 실행
+//}
+
+// 두가지 문제가 동시에 터진 경우 ? => 먼저 나온 catch의 내용만 실행 !
+// Java 의 입장에서 첫번째 예외가 발생했을 때
+// 즉시 실행 중지 후 해당 예외처리 부분으로 넘어가기 때문에 !
+
+// Exception
+// 모 ~ 든 Exception을 잡아주는 ~
+
+// e.printStackTrace();
+// 상황 출력 (개발자용)
+
+// Exception의 종류
+
+// 1. NullPointerException
+//		객체참조가 없는 상황
+//		null 값이 있는 참조변수로 .XXX()를 사용할 때 자주 발생
+//	String s = null;
+//	System.out.println(s.length());
+
+// 2. ArrayIndexOutOfBoundsException
+//		배열에서 인덱스의 범위를 초과하게 되는 상황에서 발생
+//	int[] ar = { 1, 2, 3};
+//	System.out.println(ar[3]);
+
+// 3. NumberFormatException
+//		문자열(String) -> 숫자(int, double)로 바꾸는 상황에서
+//		변환할 수 없는 문자가 있는 상황에서 발생
+//	String s = "a1234";
+//	int i = Integer.parseInt(s);
+//	System.out.println(i + 20);
+
+// Java
+//		예외처리가 강제
+// Python
+//		처리하기 싫으면 안해도 됨
+
+// txt파일을 받아와서 뭔가 할건데.. 만약에 !
+// 이 텍스트 파일을 지웠거나, 없으면 어떻게 될까 ?
+// try {
+//	FileReader fr = new FileReader("E:/Test/adaf.txt");
+// 	System.out.println(fr.read());
+// } catch (Exception e) {
+// 	e.printStackTrace();
+// }
+
+// 미루기 : throws -> try보다 더 주력
+// method throws Exception
+// Exception이 발생하면 method에서 해결해라 !
+// try-catch -> 거의 main함수에서 사용 !
+
+// ***중요***
+// Date.java : 아~~~~~주 옛날(1900년대) 만들어진 Class
+//			Y2K에 관심이 없던 시절
+//			현재 실정에 맞지 않음
+//			1900년대 당시에 용량이 적었기 때문에 연도끝에 2자리만...
+//			1970년대 이전의 컴퓨터 : 속도가 음청 느리고, 장치의 용량이 적었다.
+//			데이터의 양을 아끼기 위해서 연도처리 4byte가 아닌 2byte로 할당
+//			문제가 생김 !
+//			1900년, 2000년 끝의 두자리가 00으로 인식해서 통일됨 !
+//			-> 구분이 불가능해졌다 ! -> 컴퓨터의 오작동 가능성이 높아질 것이라 추측,,,!
+//			근데 별일 없었음 ㅋ
+
+// Date : 날짜 / 시간 
+
+// 기본생성 -> 현재 시간 / 날짜
+// import java.util.Date;
+// 연도 -> 현재년도 - 1900
+// System.out.println(now.getYear() + 1900);
+// 월 -> 0 : January
+// System.out.println(now.getMonth() + 1);
+// 일
+// System.out.println(now.getDate());
+// 요일 -> 0 : Sunday
+// System.out.println(now.getDay());
+// String[] day = { "일", "월", "화", "수", "목", "금", "토" };
+// System.out.println(day[now.getDay()]);
+
+// deprecated
+//		세월이 흐르고, 컴퓨터도 발전 -> 옛날에 만들어 놓은걸 못쓰겠음...
+//		프로그래밍 언어도 없데이트가 되어야 하는데...
+//		없애서나 / 기능을 수정할 계획이 생겨버림
+//		현재 자바버전에서는 OK ! / 다음 버전에는 없어져도 불만가지지 말거라 ~
+
+// Date - 형식지정 -> String
+// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd E a hh:mm", Locale.CANADA);
+// String s1 = sdf.format(now);
+// System.out.println(s1);
+
+
+// 특정 시간 날짜
+// Date d2 = new Date(2023, 2, 14);
+
+// String - 형식 지정 -> Date
+//		try {
+//			String s2 = "2000-02-14";
+//			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+//			Date d3 = sdf2.parse(s2);
+//			System.out.println(d3);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println("============================");
+
+// Calender / Local~~~
+// 잘 안 쓸수도...?
+
+// Wrapper Class : (자료형) 기본형들의 객체형 (포장객체)
+//		Integer, Double, Long, Void, Boolean, ...
+//		기본 자료형을 객체로 다루기 위해 사용하는 Class
+//		Java의 기본형은 값을 가지고 있는 객체 생성이 가능 !
+//		기본형이 가지고 있는 값을 내부에 두고 그 위를 포장하는 방식 !
+//	Boxing : 기본형 -> 래퍼클래스
+//	UnBoxing : 래퍼클래스 -> 기본형
+
+// 사용하는 이유
+// 1. 객체나 클래스가 제공하는 method 사용할 때
+// 2. 클래스가 제공하는 상수를 사용(MIN_VALUE, MAX_VALUE, ...)
+// 3. 숫자, 문자로 형변환을 할 때 (^vvvvvvvvvvv^)
+
+// Integer 객체 생성 -> 정수값을 넣어서 -> int형으로 return
+//		Integer b = new Integer(a);
+//		System.out.println(b.getClass());
+//		System.out.println(b);
+//		b.intValue();
+//		System.out.println(b.TYPE);
+//		System.out.println(b.getClass());
+
+// 기본형 -> 객체형
+//		double c = 123.456;
+//		Double d = new Double(c);
+
+// 객체형 -> 기본형
+//		Boolean e = new Boolean(true);
+//		boolean f = e.booleanValue();
+
+// 객체형 -> 기본형 ( 위의 과정들을 자동으로 해줌 : Auto-Unboxing )
+//		Integer g = 10;
+
+// 기본형 -> 객체형
+//		Integer g = 10;
+//		int h = g;
+
+// int의 최대 / 최소 범위
+//		int max = Integer.MAX_VALUE;
+//		int min = Integer.MIN_VALUE;
+
+// String -> 기본형 ( 다이렉트로는 힘들고, 객체형을 거쳐야 ! )
+// String -> 객체형 -> 기본형
+//		String k = "345.67";
+//		Double k2 = Double.parseDouble(k);
+//		double k3 = k2.doubleValue();
+//		
+//		String m = "150";
+//		int m2 = Integer.parseInt(m);
+//		System.out.println(m2);
+
+// 네트워크를 통해서 데이터를 받아오면 : 글자형태
+// 네트워크를 통해서 데이터를 전달할 때 : 글자형태
+// 한글처리가 까다로워 질 수 있음 !
+
+// 외우지말고 찾아보기 !! (자동완성에 있는 기능, 설명 읽어보면서 !!)
+
+// charAt() : 특정 위치에 있는 글자를 뽑아낼 때
+//		System.out.println(s2.charAt(2));
+// startsWith() : 시작하는 단어가 맞는지 아닌지 확인할 때 (true / false)
+//		System.out.println(s2.startsWith("곧"));
+// contains() : 찾는 단어가 있는지 (true / false)
+//		System.out.println(s2.contains("너무"));
+// replace() : 특정한 글자를 다른 글자로 바꿀 때 
+//		System.out.println(s2.replace("휴강", "3월"));
+// substring() : 원하는 위치의 글자를 뽑을 때 (시작위치, 끝위치 - 1)
+//		System.out.println(s2.subSequence(2, 5));
+
+// String 객체를 생성하는데 형식을 잡아서...
+// printf와 유사하다
+//		String s3 = String.format("무게 : %.2fkg", 123.4123);
+//		System.out.println(s3);
+
+// String 글자 추가
+//		String s1 = "kk";
+//		s1 = new String(s1 + "zz");
+//		System.out.println(s1);
+
+// String을 대량으로 추가
+//		StringBuffer sb = new StringBuffer(s1);
+//		sb.append("wow");
+//		sb.append("what?");
+//		sb.append("oh god !");
+//		System.out.println(sb);
+// String Type 으로 변경하기
+//		String s4 = sb.toString();
+//		System.out.println(s4);
+
+// String 분리
+//		String s5 = "kim,lee,park,choi";
+// 1. split
+// 골라서 쓸 수 있음
+//		String[] s5Ar = s5.split(",");
+
+// 2. StringTokenizer
+// 순서대로 나옴
+//		StringTokenizer st = new StringTokenizer(s5, ",");
+//		System.out.println(st.nextToken());
+//		System.out.println(st.nextToken());
+//		System.out.println(st.nextToken());
+//		System.out.println(st.nextToken());
+// while 문 활용하여 출력
+//		while (st.hasMoreTokens()) {
+//			System.out.println(st.nextToken());
+//		}
+// 속도적인 면 : StringTokenizer
+// data속에서 변수가 많다면 : split
+
+
+
