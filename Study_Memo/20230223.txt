@@ -1,0 +1,88 @@
+// 통신 
+//		Socket통신 - 실시간통신 (내 의지와는 상관없이 강제전송가능)
+//		HTTP통신 - 클라이언트가 요청을 하면 서버가 그 요청에 맞게 응답 !
+
+// Java에는 HTTP통신을 위한 HTTPClient 기능이 없'었'음 -> 개발을 했어야 했는데... ㅠ_ㅠ
+// 다른 개발자가 개발하여 공개를 해놨다 ! ^&^
+// 남이 만들어 놓은거 잘 쓰면 됨...!
+
+// 구글 검색 - "apache httpcomponents" - 왼쪽에 Download - HttpClient 4.5.14 (GA) Binary .zip download 
+// 사용법
+// 프로젝트 우클릭 - Build Path - Configure Build Path - Libraries - Add External Jars - .zip/lib/ 안에 있는거 넣기
+
+// Java에 HTTP통신이 생겼음 ! => HTTPClient 필요없음 ㅎ_ㅎ;;
+
+// http
+// https
+// 보안
+
+// DdokkangHttpClient - export - jar file - java class 체크 확인 - finish
+
+// 웹서버 (클라이언트가 웹사이트에 요청 -> 사이트가 응답)
+// 실시간 데이터를 XML Parsing (클라이언트가 데이터를 요청 -> XML / JSON 응답)
+//		나중에 그 데이터를 가지고 웹으로 이미지화를 시켜서 구현
+//		data.go.kr
+//		data.seoul.go.kr
+//		dev.naver.com
+//		dev.kakao.com
+//		...
+
+// 서울 열린 데이터광장 DB - 미세먼지 데이터 
+
+// DB에 있는 데이터를 사람들에게 보여줘야 하는 경우...
+//		대부분의 사람들이 SQL을 할 줄 모름...
+//		웹사이트 : 보통사람들이 DB쓰기 편하게 
+
+//		개발자가 데이터만 가져오고 싶음
+//		데이터를 특정한 형식으로 표현해줘야 하는데
+//		DB에 있는 데이터를 표현하는 형식 : XML, JSON
+
+// Parsing - kxml2.jar (안드로이드에는 내장되어 있음)
+//	필요없는 데이터는 걷어내고, 원하는 형태로 가공하는 작업
+
+// google - mvnrepository - kxml search - 1. KXML 2 IS A Small XML Pull Parser Based On The Common XML Pull API
+// 2.3.0 - jar file download 
+
+// XML ( eXtensible Mark-up Language )
+//		DB에 있는 데이터를 HTML형태로 표현한 것
+//		<xxx>		: 시작태그	(xxx : 태그명)
+//			yyy		: 텍스트
+//		</xxx>		: 종료태그
+
+// START_DOCUMENT 	: 문서의 시작
+// END_DOCUMENT		: 문서의 끝
+// START_TAG		: 시작태그 (<xxx>)
+// END_TAG			: 종료태그 (</xxx>)
+// TEXT				: 텍스트
+
+// 데이터 가져오기
+// 서울 열린 데이터 광장 - 미세먼지 - 공공데이터 - 서울시 권역별 실시간 대기환경 현황
+// 미리보기 - Open API - 샘플 URL	권역별 실시간 대기환경정보 조회
+// http://openAPI.seoul.go.kr:8088/(인증키)/xml/RealtimeCityAir/1/5/
+
+// String 배열에 담아서 append 하기
+BufferedWriter bw = null;
+try {
+	FileOutputStream fos = new FileOutputStream("C:\\Users\\sdedu\\Desktop\\Java_Test\\encoding\\testt.txt", true);
+			
+	OutputStreamWriter osw = new OutputStreamWriter(fos);
+			
+	bw = new BufferedWriter(osw);
+			
+	String[] sArr = new String[5];
+	sArr[0] = "0";
+	sArr[1] = "1";
+	sArr[2] = "2";
+	sArr[3] = "3";
+	sArr[4] = "4";
+		
+	for (int i = 0; i < sArr.length; i++) {
+		bw.write(sArr[i] + "\r\n");
+	}
+			
+	bw.flush();
+			
+} catch (Exception e) {
+	e.printStackTrace();
+}
+
