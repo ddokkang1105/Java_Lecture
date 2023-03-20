@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 자주 사용할만한 (유용한) 태그들 -->
+	
+	<div>의미 x, 목적에 따라 컨텐츠를 묶을 때 사용</div>
+	<span>의미 x, 목적에 따라 컨텐츠를 묶을 때 사용</span>
+	<!-- div vs span : 줄바꿈의 유무 (div는 줄바꿈 기능 포함 O) -->
+	
+	
+	ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ<br>		<!-- <br> : 줄 바꾸기 -->
+	ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ<hr>		<!-- <hr> : 선긋고 줄 바꾸기 -->
+	ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<p>		<!-- <p> : 두 줄 바꾸기 (문단 나눌때 사용) -->
+	ㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂ		
+		
+	<p align="right">으아아아아아아ㅏ아앙아아악</p>
+	<p>오늘 저녁은 회식인뎁쇼</p>
+	<p align="center">시원하게 맥주가 맞겠죠?</p>
+	<p>거기는 소주 안 팔아요</p>
+	<hr>
+	
+	띄어                              쓰기 <br> <!-- 띄어쓰기 1번만 적용되는 상황 -->
+	띄어&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;쓰기 <hr> <!-- &nbsp; : 띄어쓰기 -->
+	<!-- a는 10보다 작거나 같다 -->
+	<!-- b는 20보다 크다 -->
+	a &le; 10 <br>
+	b &gt; 20 <hr>
+	
+	<!-- 글자 -->
+	<!--
+		글자 사이즈 : 1 ~ 7
+		 
+		글자 색
+		내장되어있는 색상 : 그 이름 불러다가 사용
+		
+		빛 혼합
+		#RRGGBB
+		#RRGGBBAA(투명도)
+		
+	-->
+	<font size="7" face="궁서" color="#DCDCDC">ㅋㅋㅋㅋㅋ</font> <br>
+	
+	<b>굵게</b> <br>
+	<i>이텔릭</i> <br>
+	<em>강조</em> <br>
+	<strong>강조</strong> <br>
+	<u>밑줄</u>
+	
+	<h1>제목용!</h1> <!-- h1 ~ h6 : 제목 이름 붙일때 (줄바꾸기 기능 포함 O) -->
+	<h2>ㅋㅋㅋ</h2>
+	<h3>ㅋㅋㅋ</h3> <hr>
+	
+	<!-- 목록 -->
+	<ol type="I">		<!-- 순서가 있는 목록 -->
+		<li>안녕하세요</li>
+		<li>반갑습니다</li>
+		<li>다시보네요</li>
+		<li>보기싫은데</li>
+	</ol> 
+	<br>
+	
+	<ul type="square">				<!-- 순서가 없는 목록 -->
+		<li>안녕하세요</li>
+		<li>반갑습니다</li>
+		<li>다시보네요</li>
+		<li>보기싫은데</li>
+	</ul> <hr>
+	
+	<!-- 그룹 -->
+	<fieldset>						<!-- 하나의 그룹으로 묶어주는 태그 -->
+		<legend>안녕하세요</legend>	<!-- 그 그룹의 제목을 붙여주는 태그 -->
+			<ul>
+				<li>
+					<label>input을 설명하기 위한 용도 : </label>
+					<input value="여기에 뭔가 입력할 수 있어요!"><br>
+					
+					<label></label>
+					<input type="checkbox">ㅇㅈ? 어 ㅇㅈ ~ <br>
+					<label><input type="checkbox">동의? 어 보감 ~ </label> <br>
+					
+					<label for="agree">체크박스는 작으니 이 텍스트를 누르면 체크가 된다구 ~ </label>
+					<input type="checkbox" id="agree">이동휘? 어 박보검 ~
+					
+				</li>
+			</ul> 
+	</fieldset>
+	
+	<!-- input의 타입이 다양해요 !! -->
+	<input type="button" > <br>
+	<input type="week" > <br>
+	<input type="date" > <br>
+	<input type="color" > <br>
+	<input type="file" > <br>
+	<input type="range" > <br>
+	<input type="reset" > <br>
+	<input type="radio" > <br>
+	
+	<!-- 
+		<input type="유형" 속성="속성값">
+			type :
+				hidden : 사용자한테 안보임, 서버로 값들을 보낼 때
+				password : 비밀번호 입력
+				range : 숫자(범위)를 조절할 수 있는 슬라이드 막대
+				number : 숫자를 조절할 수 있는 화살표
+				search : 검색
+				checkbox : 체크박스 (여러개 선택 가능 O)
+				radio : 라디오 버튼 (1개만 선택 가능 O)
+				file : 업로드 기능
+				button : 버튼
+				text, reset, submit, image, ...
+			속성 : 
+				readonly : 읽기 전용으로 만들기
+				placeholder : 힌트 표시(input 클릭하면 내용 사라짐)
+				autofocus : 그 위치에 마우스 커서 표시됨
+				autocomplete : 자동완성 
+				maxlength : 최대로 입력할 수 있는 글자 수 설정	
+	-->
+	
+</body>
+</html>

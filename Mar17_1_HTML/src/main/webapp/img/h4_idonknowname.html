@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 이미지파일, 움짤, 동영상, mp3음악파일, pdf파일 -->
+	
+	<!-- 
+		파일 경로
+			절대경로 : 처음부터 다 명시 !
+				서울특별시 강서구 XXX로 OO길 11 (ㅁㅁ동, ㅂㅂ오피스텔 13층)
+				실전에서는 사용불가능 !
+			상대경로 : 현재 작업중인 html 기준으로
+				.. : 한단계 상위의 경로로 
+				*** 한글파일명 가급적 사용 X ! 
+	 -->
+	<!-- 
+		사이즈 조절
+		가로나 세로 중에 하나만 조절하면 -> 원본 비율에 따라 알아서 크기 조절
+		단위 안쓰면 px(픽셀)단위
+		% 단위 사용 가능 
+		사이즈 조절은 안하는게 베스트 ! -> 사진이 깨져서 나온다리,,,
+	 -->
+	
+	
+	<img width = "1000px" height = "500px" src="C:\\Users\\sdedu\\Desktop\\JSP\\Mar17_1_HTML\\src\\main\\webapp\\img\\mh1.gif">
+	<hr>
+	<img width = "100%" src="..\\mh3.gif">
+	<hr>
+	<img src="Messi.jpg">
+	<hr>
+	<video src="..\\mh.mp4" controls="controls"></video>
+	<hr>
+	<audio src="..\\forest.mp3" controls="controls"></audio>	
+	<hr>
+	<!-- 외부 애플리케이션이나, 음악, 영상, 문서 등의 콘텐츠를 포함시킬 수 있는 태그 -->
+	<embed src="..\\linear_algebra.pdf" width="700" height="500">	
+	
+</body>
+</html>
