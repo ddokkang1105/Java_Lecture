@@ -6,33 +6,33 @@ public class VMain3 {
 	}
 	
 	public static void IntroductionMyself() {
-		String myName = "±èµµ¿µ";
+		String myName = "ê¹€ë„ê¹¡";
 		int year = 2023;
 		int month = 1;
 		int day = 30;
-		String liveIn = "¿©ÁÖ";
+		String liveIn = "ì„œìš¸";
 		double sight = -4.0;
 		boolean javaExp = true;
 
-		System.out.printf("ÀÌ¸§ : %s\n", myName);
-		System.out.printf("¿À´Ã ³¯Â¥ : %4d³â %02d¿ù %02dÀÏ\n", year, month, day);
-		System.out.printf("»ç´Â °÷ : %s\n", liveIn);
-		System.out.printf("½Ã·Â : %.1f\n", sight);
-		System.out.printf("Java °æÇèÀÇ À¯¹« : %b\n", javaExp);		
+		System.out.printf("ì´ë¦„ : %s\n", myName);
+		System.out.printf("ì˜¤ëŠ˜ ë‚ ì§œ : %4dë…„ %02dì›” %02dì¼\n", year, month, day);
+		System.out.printf("ì‚¬ëŠ” ê³³ : %s\n", liveIn);
+		System.out.printf("ì‹œë ¥ : %.1f\n", sight);
+		System.out.printf("Java ê²½í—˜ì˜ ìœ ë¬´ : %b\n", javaExp);		
 	}
 	
 	public static void TodayLunchGrade() {
-		String lunchMenu = "µ·±î½º";
+		String lunchMenu = "ëˆê¹ŒìŠ¤";
 		int lunchPrice = 10000;
 		int lunchCalorie = 555;
 		double lunchGrade = 4.6;
 		boolean lunchReVisit = true;
 		
-		System.out.printf("Á¡½ÉÀÌ¸§ : %s\n", lunchMenu);
-		System.out.printf("Á¡½É°¡°İ : %d¿ø\n", lunchPrice);
-		System.out.printf("Á¡½ÉÄ®·Î¸® : %d\n", lunchCalorie);
-		System.out.printf("Á¡½ÉÆòÁ¡ : %.1fÁ¡\n", lunchGrade);
-		System.out.printf("³ªÁß¿¡ ¶Ç ¸ÔÀ» °ÍÀÎÁö : %b\n", lunchReVisit);		
+		System.out.printf("ì ì‹¬ì´ë¦„ : %s\n", lunchMenu);
+		System.out.printf("ì ì‹¬ê°€ê²© : %dì›\n", lunchPrice);
+		System.out.printf("ì ì‹¬ì¹¼ë¡œë¦¬ : %d\n", lunchCalorie);
+		System.out.printf("ì ì‹¬í‰ì  : %.1fì \n", lunchGrade);
+		System.out.printf("ë‚˜ì¤‘ì— ë˜ ë¨¹ì„ ê²ƒì¸ì§€ : %b\n", lunchReVisit);		
 		
 	}
 }
