@@ -1,0 +1,306 @@
+-- 학생 테이블 (이름, 키, 강의장(EX: 1강의장 / 2강의장 / 3강의장)) 에 대한 정보 !
+
+-- 학생 데이터 10개 정도 담기 !
+CREATE TABLE MAR14_STUDENT (
+	S_NO NUMBER(2) PRIMARY KEY,
+    S_NAME VARCHAR2(10 CHAR) NOT NULL,
+    S_HEIGHT NUMBER(4, 1) NOT NULL,
+    S_CLASS VARCHAR2(10 CHAR) NOT NULL
+);
+
+CREATE SEQUENCE MAR14_STUDENT_SEQ;
+
+INSERT INTO MAR14_STUDENT VALUES(MAR14_STUDENT_SEQ.NEXTVAL, '김민준', 175.2, '1 강의장');
+INSERT INTO MAR14_STUDENT VALUES(MAR14_STUDENT_SEQ.NEXTVAL, '김서준', 170.3, '2 강의장');
+INSERT INTO MAR14_STUDENT VALUES(MAR14_STUDENT_SEQ.NEXTVAL, '이민준', 169.1, '3 강의장');
+INSERT INTO MAR14_STUDENT VALUES(MAR14_STUDENT_SEQ.NEXTVAL, '김지호', 165.5, '1 강의장');
+INSERT INTO MAR14_STUDENT VALUES(MAR14_STUDENT_SEQ.NEXTVAL, '이하준', 162.6, '1 강의장');
+INSERT INTO MAR14_STUDENT VALUES(MAR14_STUDENT_SEQ.NEXTVAL, '박건우', 180.4, '2 강의장');
+INSERT INTO MAR14_STUDENT VALUES(MAR14_STUDENT_SEQ.NEXTVAL, '차은우', 186.5, '3 강의장');
+INSERT INTO MAR14_STUDENT VALUES(MAR14_STUDENT_SEQ.NEXTVAL, '김민재', 174.2, '3 강의장');
+INSERT INTO MAR14_STUDENT VALUES(MAR14_STUDENT_SEQ.NEXTVAL, '박준혁', 181.3, '2 강의장');
+INSERT INTO MAR14_STUDENT VALUES(MAR14_STUDENT_SEQ.NEXTVAL, '오지환', 174.7, '1 강의장');
+------------------------------------------------------------------------------------------------------------
+-- WINDOW 함수
+-- 행과 행 사이의 관계를 쉽게 정의하기 위해 만든 함수
+-- 복잡한 프로그램을 하나의 문장으로 쉽게 해결할 수 있다.
+-- 대표적으로 우리가 전에 배운 집계합수, 순위함수가 있다
+-- 그래서 이 WINDOW 함수로 순위, 합계, 평균 등을 조작할 수 있음
+
+-- WINDOW 함수의 구조
+SELECT 컬럼명, 컬럼명, 집계 함수, ... ,
+	OVER ( [PARTITION BY 컬럼] [ORDER BY 컬럼] [WINDOWING 절] )
+	FROM 테이블명;
+	
+	-- OVER() : ORDER BY, GROUP BY 구문을 대체할 수 있는 함수
+	-- PARTITION BY : 컬럼을 기준으로 그룹(파티션)을 나눈다
+	-- ORDER BY : OVER함수 내에서 정렬
+	-- WINDOWING : 행 기준의 범위를 정함
+		-- 옵션
+		-- ROWS : 범위를 지정 (행을 기준으로)
+		-- RANGE : 범위를 지정 (행이 가지고 있는 값을 기준으로)
+		-- BETWEEN ~ AND : 시작과 끝 위치를 설정
+		-- UNBOUNDED PRECEDING : 시작위치가 첫번째 행
+		-- UNBOUNDED FOLLOWING : 마지막위치가 마지막 행
+		-- CURRENT ROW : 현재 행까지
+		
+-- RANK : 중복 순위만큼 다음 순위 값을 증가 시킴
+SELECT S_NAME, S_CLASS, S_HEIGHT,
+	RANK() OVER (ORDER BY S_HEIGHT DESC) HEIGHT_RANK,
+	RANK() OVER (PARTITION BY S_CLASS ORDER BY S_HEIGHT DESC) IN_CLASS_RANK
+				-- 강의장 별로 그룹을 지어서 키 순위를 냄
+FROM MAR14_STUDENT;
+
+-- DENSE_RANK : 중복 순위가 존재해도 순차적으로 다음 순위 값을 표시함
+SELECT S_NAME, S_CLASS, S_HEIGHT,
+	RANK() OVER (ORDER BY S_HEIGHT DESC) HEIGHT_RANK,		-- 2등, 2등, 4등
+	DENSE_RANK() OVER (ORDER BY S_HEIGHT DESC) DENSE_RANK	-- 2등, 2등, 3등
+FROM MAR14_STUDENT;
+
+-- LAST_VALUE : 파티션에서 가장 마지막에 나오는 값
+SELECT S_CLASS, S_NAME, S_HEIGHT,
+	-- 강의장별로 그룹을 지었고, 그 안에는 학생들의 키 내림차순으로 정렬
+	LAST_VALUE(S_NAME) OVER(PARTITION BY S_CLASS ORDER BY S_HEIGHT DESC
+	-- 그 그룹내의 처음부터 끝까지 행에는 마지막에 나오는 학생의 이름값을 불러오겠다
+	ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)
+FROM MAR14_STUDENT;
+
+-- LAG : 이전 행의 값을 가져옴
+SELECT S_CLASS, S_NAME, S_HEIGHT,
+	-- 이전 행의 S_HEIGHT 값을 가져올건데, 강의장별로 그룹을 지었고, 키 오름차순 정렬
+	-- 만약에 이전 행의 키 값이 없어 NULL값이면 '-'으로 바꾸고
+	DECODE(LAG(S_HEIGHT) OVER(PARTITION BY S_CLASS ORDER BY S_HEIGHT), NULL, '-',
+	-- 이전 행의 키값이 있으면 그 값을 불러오겠다 !
+	LAG(S_HEIGHT) OVER(PARTITION BY S_CLASS ORDER BY S_HEIGHT)) LAG_HEIGHT
+FROM MAR14_STUDENT;
+
+-- LEAD : 다음 행의 값을 가져옴
+SELECT S_CLASS, S_NAME, S_HEIGHT,
+	-- 다음 행의 S_HEIGHT 값을 가져올건데, 강의장별로 그룹을 지었고, 키 오름차순 정렬
+	-- 만약 다음 행이 없어서 NULL이면 '-'으로 바꾸고
+	DECODE(LEAD(S_HEIGHT) OVER(PARTITION BY S_CLASS ORDER BY S_HEIGHT), NULL, '-',
+	-- 다음 행의 키 값이 있으면 그 값을 불러오겠다.
+	LEAD(S_HEIGHT) OVER(PARTITION BY S_CLASS ORDER BY S_HEIGHT)) LEAD_HEIGHT
+FROM MAR14_STUDENT;
+
+-- NTILE : 결과를 사용자가 지정한 그룹의 수로 나눠서 출력
+-- 키 내림차순 기준으로 5개의 그룹으로 나누기
+SELECT S_CLASS, S_NAME, S_HEIGHT,
+    NTILE(5) OVER(ORDER BY S_HEIGHT) N_TILE
+FROM MAR14_STUDENT;
+------------------------------------------------------------------------------------------------------------
+-- 계층형 쿼리
+-- 테이블에 계층형 데이터가 존재하는 경우 이를 조회하기 위한 쿼리
+-- 계층형 데이터란, 동일 테이블에 계층적으로 상위데이터와 하위데이터가 포함된 데이터
+-- 하드웨어를 예로..
+-- 중앙처리장치, 기억장치, 입출력장치의 상위데이터는 하드웨어다.
+-- 입출력장치를 나눠서 입력장치, 출력장치의 상위데이터가 입출력장치라고 하자
+
+-- 이 내용을 정의하는 테이블을 만들어보자
+CREATE TABLE MAR14_DEVICE(
+    D_NAME VARCHAR2(10 CHAR) PRIMARY KEY,
+    D_PRIOR VARCHAR2(10 CHAR)  -- 하드웨어의 상위장치는 없으므로 제약조건 X !!
+);
+
+INSERT INTO MAR14_DEVICE VALUES('하드웨어', 'NULL');
+INSERT INTO MAR14_DEVICE VALUES('중앙처리장치', '하드웨어');
+INSERT INTO MAR14_DEVICE VALUES('기억장치', '하드웨어');
+INSERT INTO MAR14_DEVICE VALUES('입출력장치', '하드웨어');
+INSERT INTO MAR14_DEVICE VALUES('입력장치', '입출력장치');
+INSERT INTO MAR14_DEVICE VALUES('출력장치', '입출력장치');
+
+-- 계층형 쿼리의 형태
+START WITH 조건 			-- 이름에서 추측할 수 있겠지만, 계층 구조 전개 시작 위치를 지정
+							-- D_PRIOR IS NULL을 하면 D_PRIOR 컬럼에 NULL값이 들어있는
+							-- '하드웨어' 행부터 시작위치로 지정
+CONNECT BY [NOCYCLE] 조건	-- CONNECT BY 절은 다음에 전개될 하위 데이터를 지정하는데
+							-- PRIOR 하위데이터 = 상위데이터 => 순방향 전개
+							-- PRIOR 상위데이터 = 하위데이터 => 역방향 전개
+							-- NO CYCLE은 데이터를 전개하면서 이미 나타난 데이터가
+							--		또 나오는 것을 방지해줌 (없어도 됨 !)
+[ORDER SIBLINGS BY 컬럼];	-- 동일 계층 사이에서 정렬을 해준다
+
+-- SELECT 문
+SELECT D_NAME, D_PRIOR, LEVEL FROM MAR14_DEVICE -- 계층을 보기 위해 LEVEL 이라는 컬럼을 심어둠
+	START WITH D_PRIOR IS NULL	-- 이걸 통해 '하드웨어'행을 시작점으로 정함
+								-- (NULL값이 들어있는 행부터 시작)
+	CONNECT BY PRIOR D_NAME = D_PRIOR
+								-- 이 때 여기서 시작행인 '하드웨어'가 상위데이터가 되어서 진행
+								-- 하드웨어를 상위장치로 가지고 있는 기억, 입출력, 중앙처리장치는
+								-- LEVEL 2가 된다.
+								-- ... LEVEL 3도 마찬가지
+	ORDER SIBLINGS BY D_NAME DESC;
+------------------------------------------------------------------------------------------------------------
+-- 배추, 3000G, 10000원, 홈플러스, 강서점, 1000평, 주차장 500석
+-- 무, 500G, 5000원, 홈플러스, 강남점, 500평, 주차장 300석
+-- 배추, 2000G, 5000원, 이마트, 서초점, 800평, 주차장 800석
+------------------------------------------------------------------------------------------------------------
+CREATE TABLE MAR14_MARKET(
+    M_NO NUMBER(2) PRIMARY KEY,
+    M_NAME VARCHAR2(10 CHAR) NOT  NULL,
+    M_LOCATION VARCHAR2(10 CHAR) NOT NULL,
+    M_AREA NUMBER(4) NOT NULL,
+    M_PARKING NUMBER(4) NOT NULL
+);
+
+CREATE SEQUENCE MAR14_MARKET_SEQ;
+
+INSERT INTO MAR14_MARKET VALUES(MAR14_MARKET_SEQ.NEXTVAL, '홈플러스', '강서점', 1000, 500);
+INSERT INTO MAR14_MARKET VALUES(MAR14_MARKET_SEQ.NEXTVAL, '홈플러스', '강남점', 500, 300);
+INSERT INTO MAR14_MARKET VALUES(MAR14_MARKET_SEQ.NEXTVAL, '이마트', '서초점', 800, 800);
+------------------------------------------------------------------------------------------------------------
+CREATE TABLE MAR14_PRODUCT(
+    P_NO NUMBER(2) PRIMARY KEY,
+    P_NAME VARCHAR2(10 CHAR) NOT NULL,
+    P_WEIGHT NUMBER(4) NOT NULL,
+    P_PRICE NUMBER(5) NOT NULL,
+    P_M_NO NUMBER(2) NOT NULL,
+        CONSTRAINT FK_MAR14_PRODUCT FOREIGN KEY(P_M_NO)
+        REFERENCES MAR14_MARKET(M_NO)
+        ON DELETE CASCADE
+);
+
+CREATE SEQUENCE MAR14_PRODUCT_SEQ;
+
+INSERT INTO MAR14_PRODUCT VALUES(MAR14_PRODUCT_SEQ.NEXTVAL, '배추', 3000, 10000, 1);
+INSERT INTO MAR14_PRODUCT VALUES(MAR14_PRODUCT_SEQ.NEXTVAL, '무', 5000, 5000, 2);
+INSERT INTO MAR14_PRODUCT VALUES(MAR14_PRODUCT_SEQ.NEXTVAL, '배추', 2000, 5000, 3);
+------------------------------------------------------------------------------------------------------------
+-- CREATE TABLE - DBA
+-- DROP TABLE - DBA
+-- CREATE SEQUENCE - DBA
+-- 계정 하나로 여러명 사용 가능
+-- 회사가면 개발자용 계정을 알려줌 => 위의 작업들 권한은 없을 듯..?
+------------------------------------------------------------------------------------------------------------
+-- C - INSERT
+--			SEQUENCE 사용, 날짜 집어넣고, ...
+-- R - SELECT
+--			거의 대부분의 시간을 할애함
+-- U - UPDATE
+UPDATE 테이블명
+	SET 컬럼명 = 값, 컬럼명 = 값, ... -- 수정할 내용
+	WHERE 조건;
+	
+-- 무를 공짜로
+UPDATE MAR14_PRODUCT
+    SET P_PRICE = 0
+    WHERE P_NAME = '무';
+
+-- 배추를 김장용배추로 이름 수정
+UPDATE MAR14_PRODUCT
+    SET P_NAME = '김장용배추'
+    WHERE P_NAME IN '배추';
+
+-- 모든 마트의 주차장 30% 줄이기
+UPDATE MAR14_MARKET
+    SET M_PARKING = M_PARKING * 0.7;
+
+-- 홈플러스 강서점의 상품가격 10% 할인
+UPDATE MAR14_PRODUCT
+    SET P_PRICE = P_PRICE * 0.9
+    WHERE P_M_NO IN (
+        SELECT M_NO
+        FROM MAR14_MARKET
+        WHERE M_NAME = '홈플러스' AND M_LOCATION = '강서점'
+    );
+	
+-- 제일 비싼 상품 10% 할인
+UPDATE MAR14_PRODUCT
+    SET P_PRICE = P_PRICE * 0.9
+    WHERE P_PRICE IN (
+        SELECT MAX(P_PRICE)
+        FROM MAR14_PRODUCT
+    );
+------------------------------------------------------------------------------------------------------------
+-- D - DELETE
+DELETE FROM 테이블명
+	WHERE 조건식;
+	
+-- 무 삭제
+DELETE MAR14_PRODUCT
+    WHERE P_NAME = '무';
+	
+-- 가장 좁은 매장의 상품 다 삭제
+DELETE MAR14_PRODUCT
+    WHERE P_M_NO IN (
+        SELECT M_NO
+        FROM MAR14_MARKET
+        WHERE M_AREA IN (
+            SELECT MIN(M_AREA)
+            FROM MAR14_MARKET
+        )
+    );
+------------------------------------------------------------------------------------------------------------
+-- 홈플러스 강남점이 폐점
+DELETE FROM MAR14_MARKET
+	WHERE M_NAME = '홈플러스' AND M_LOCATION = '강남점';
+-- 홈플러스 강남점이 없어지는데, 그 안에 있던 상품들은 어떻게 할지..?
+-- 그냥 두거나 / 같이 삭제 / 비워두거나 ...
+-- 정답이 없어서.. 나중에 프로젝트시 팀원들끼리 잘 상의해야 !!!
+------------------------------------------------------------------------------------------------------------
+-- 1. ORACLEDB 서버에 다음 데이터를 표현할 수 있는 DB자료구조를 만드는 SQL문을 작성해주세요
+
+--		- 컴퓨터 이름 : 컴퓨터1
+--		- 운영 체제 : WINDOWS 10 PRO
+--		- 포맷 날짜 : 2023-02-14
+--		- 무게 : 5.12KG
+--		- CPU : I5-1234
+
+--		- 컴퓨터 이름 : 컴퓨터2
+--		- 운영 체제 : WINDOWS 11 PRO
+--		- 포맷 날짜 : 2023-03-01
+--		- 무게 : 5.23KG
+--		- CPU : I7-5678
+CREATE TABLE MAR14_COMPUTER (
+    C_NO NUMBER(2) PRIMARY KEY,
+    C_NAME VARCHAR2(10 CHAR) NOT NULL,
+    C_OS VARCHAR2(20 CHAR) NOT NULL,
+    C_FORMAT DATE NOT NULL,
+    C_WEIGHT NUMBER(4, 2) NOT NULL,
+    C_CPU VARCHAR2(10 CHAR) NOT NULL
+);
+
+CREATE SEQUENCE MAR14_COMPUTER_SEQ;
+
+-- 2. 1번에서 만든 테이블에 다음 데이터를 추가하는 SQL문을 작성해주세요
+--		(1번의 보기에 있는 데이터도 추가할 것 ( 총 3개의 데이터 ) )
+
+--		- 컴퓨터 이름 : 컴퓨터3
+--		- 운영 체제 : WINDOWS 10 PRO
+--		- 포맷 날짜 : 2023-02-22
+--		- 무게 : 3.22KG
+--		- CPU : I7-1234
+INSERT INTO MAR14_COMPUTER VALUES(MAR14_COMPUTER_SEQ.NEXTVAL, '컴퓨터1', 'WINDOWS 10 PRO',
+    TO_DATE('2023-02-14', 'YYYY-MM-DD'), 5.12, 'I5-1234');
+
+INSERT INTO MAR14_COMPUTER VALUES(MAR14_COMPUTER_SEQ.NEXTVAL, '컴퓨터2', 'WINDOWS 11 PRO',
+    TO_DATE('2023-03-01', 'YYYY-MM-DD'), 5.23, 'I7-5678');
+
+    INSERT INTO MAR14_COMPUTER VALUES(MAR14_COMPUTER_SEQ.NEXTVAL, '컴퓨터3', 'WINDOWS 10 PRO',
+    TO_DATE('2023-02-22', 'YYYY-MM-DD'), 3.22, 'I7-1234');
+
+-- 3. 1번에서 만든 테이블에서, 포맷한지 가장 오래된 컴퓨터의 날짜와
+--		총 컴퓨터 수를 조회하는 SQL문을 작성해주세요
+SELECT MIN(C_FORMAT), COUNT(*) FROM MAR14_COMPUTER;
+
+-- 4. 1번에서 만든 테이블에서, 가장 최근에 포맷한 컴퓨터의 이름을 조회하는 SQL문을 작성해주세요
+SELECT C_NAME
+    FROM MAR14_COMPUTER
+    WHERE C_FORMAT IN (
+        SELECT MAX(C_FORMAT)
+        FROM MAR14_COMPUTER
+    );
+
+-- 5. 1번에서 만든 테이블에서, 2번째로 가벼운 컴퓨터 ~ 3번째로 가벼운 컴퓨터의
+--		전체 정보를 조회하는 SQL문을 작성해주세요
+SELECT *
+    FROM (
+        SELECT ROWNUM RN, C_NO, C_NAME, C_OS, C_FORMAT, C_WEIGHT, C_CPU
+        FROM (
+            SELECT C_NO, C_NAME, C_OS, C_FORMAT, C_WEIGHT, C_CPU
+            FROM MAR14_COMPUTER
+            ORDER BY C_WEIGHT
+        )
+    )
+    WHERE RN BETWEEN 2 AND 3;
+------------------------------------------------------------------------------------------------------------

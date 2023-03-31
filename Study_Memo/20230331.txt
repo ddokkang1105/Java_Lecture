@@ -1,0 +1,3 @@
+google - maven repository - jstl search - many downloads by users
+- 1.2ver - jar file download
+-> WEB-INF -> lib -> paste
