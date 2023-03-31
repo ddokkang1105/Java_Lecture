@@ -1,0 +1,42 @@
+@charset "EUC-KR";
+
+@font-face {
+	font-family: "Dove";
+	src: url("Dovemayo.ttf"); 
+}
+
+#RSPTbl {
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 150px;
+	font-family: "Dove";
+	background-color: #af94de;
+	color: white;
+}
+
+img {
+	width: 200px;
+	height: 200px;
+}
+
+#tr1 {
+	font-size: 70pt;
+	border-bottom: dotted 10px;
+}
+
+.resultTitle {
+	font-size: 50pt;
+	border: black dashed 5px;
+}
+
+.rspTd {
+	font-size: 30pt;
+}
+
+
+
+.resultTd {
+	font-size:23pt;
+}
+
+

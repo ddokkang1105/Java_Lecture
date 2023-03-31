@@ -1,0 +1,62 @@
+@charset "EUC-KR";
+
+@font-face {
+	font-family: "Dove";
+	src: url('Dovemayo.ttf');
+}
+
+body {
+	background-color: #ddffdd;
+}
+
+img {
+	width: 300px;
+	height: 300px;
+	border: #6B8C6B dotted 15px;
+}
+
+#mainTbl {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 70px;
+	background-color: #9DCCB8;
+	font-family: "Dove";
+	border-radius: 20px;
+	box-shadow: #C8E6C8 3px 5px 5px;
+	color : #374037;
+}
+
+.titleTd {
+	font-size: 100pt;
+	border-bottom: #6C8C7E dashed 10px;	
+}
+
+.subTitleTd {
+	font-size: 30pt;
+	color: #6C8C7E;
+}
+
+.comAnsTd {
+	font-size: 40pt;
+	color: #8C5D74;
+}
+
+.myAnsTd {
+	font-size: 25pt;
+	color: #400911;
+	border: #CC1D37 solid 2px;
+}
+
+.resultTd {
+	font-size: 45pt;
+}
+
+
+
+
+
+
+
+
+
+
