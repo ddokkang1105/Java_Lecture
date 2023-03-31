@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript">
+//	function lol() {
+//		alert('lolololol');
+//	}
+
+	// 1. 버튼 3개를 추가해서 각각 '100원', '500원', '1000원' 텍스트 넣기
+	// 2. 각 버튼에 기능 넣기
+	// 3.
+	//		500원 미만이면 '선택할 수 있는 음료수 없음!'
+	//		500원 이상이면 '콜라 선택 가능 !'
+	//		700원 이상이면 '콜라, 사이다 선택 가능 !'
+	//		1000원 이상이면 '콜라, 사이다, 닥터페퍼 선택 가능 !'
+	//		2000원 이상이면 '콜라, 사이다, 닥터페퍼, 맥주 선택 가능 !'
+	//		3000원 이상이면 '콜라, 사이다, 닥터페퍼, 맥주, 소주 선택 가능 !'
+	//			=> alert으로 출력
+	// 4. 돈 쌓이는거 log로 확인
+	// 5. 버튼 클릭했을 때 반환 기능
+	
+	let money = 0;
+	console.log(money);
+	
+	function add100() {
+		money += 100;
+		console.log(money);
+		if (money >= 3000) {
+			alert('콜라, 사이다, 닥터페퍼, 맥주, 소주 선택 가능 !');
+		} else if (money >= 2000) {
+			alert('콜라, 사이다, 닥터페퍼, 맥주 선택 가능 !');
+		} else if (money >= 1000) {
+			alert('콜라, 사이다, 닥터페퍼 선택 가능 !');
+		} else if (money >= 700) {
+			alert('콜라, 사이다 선택 가능 !');
+		} else if (money >= 500) {
+			alert('콜라 선택 가능 !');
+		} else {
+			alert('선택할 수 있는 음료수 없음!');
+		}
+	}
+	
+	function add500() {
+		money += 500;
+		console.log(money);
+		if (money >= 3000) {
+			alert('콜라, 사이다, 닥터페퍼, 맥주, 소주 선택 가능 !');
+		} else if (money >= 2000) {
+			alert('콜라, 사이다, 닥터페퍼, 맥주 선택 가능 !');
+		} else if (money >= 1000) {
+			alert('콜라, 사이다, 닥터페퍼 선택 가능 !');
+		} else if (money >= 700) {
+			alert('콜라, 사이다 선택 가능 !');
+		} else if (money >= 500) {
+			alert('콜라 선택 가능 !');
+		} else {
+			alert('선택할 수 있는 음료수 없음!');
+		}
+		
+	}
+	
+	function add1000() {
+		money += 1000;
+		console.log(money);
+		if (money >= 3000) {
+			alert('콜라, 사이다, 닥터페퍼, 맥주, 소주 선택 가능 !');
+		} else if (money >= 2000) {
+			alert('콜라, 사이다, 닥터페퍼, 맥주 선택 가능 !');
+		} else if (money >= 1000) {
+			alert('콜라, 사이다, 닥터페퍼 선택 가능 !');
+		} else if (money >= 700) {
+			alert('콜라, 사이다 선택 가능 !');
+		} else if (money >= 500) {
+			alert('콜라 선택 가능 !');
+		} else {
+			alert('선택할 수 있는 음료수 없음!');
+		}
+		
+	}
+	
+	function returnMoney() {
+		if (money == 0) {
+			alert('넣은 돈이 없다 !');
+		} else {
+			alert('넣은 돈을 반환 !');
+		}
+		money = 0;
+		console.log(money);
+	}
+////////////////////////////////////////////////////////////////////////////	
+	let choice; 
+	let spending;
+	
+	function coin() {
+		alert('돈을 넣어주세요.');
+	}
+	
+	function choiceResult() {
+		while (true) {
+			if (choice == null || choice == '' || choice == ' ') {
+				alert('선택안함 !');
+				break;
+			} else {
+					switch (choice) {
+					case "콜라":
+						spending = 500;
+						money -= spending;
+						break;
+					case "사이다":
+						spending = 700;
+						money -= spending;
+						break;
+					case "닥터페퍼":
+						spending = 1000;
+						money -= spending;
+						break;
+					case "맥주":
+						spending = 2000;
+						money -= spending;
+						break;
+					case "소주":
+						spending = 3000;
+						money -= spending;
+						break;
+					default:
+						alert('오타거나 존재하지 않다 !');
+						break;
+					}
+				alert(`${spending}원을 지출하여 ${choice}를 얻었다 !`);
+			}
+			
+		}
+				
+	}
+	
+	function choiceDrink() {
+			if (money >= 3000) {
+				choice = prompt('콜라, 사이다, 닥터페퍼, 맥주, 소주 선택 가능 !');
+				choiceResult();
+			} else if (money >= 2000) {
+				choice = prompt('콜라, 사이다, 닥터페퍼, 맥주 선택 가능 !');
+				choiceResult();
+			} else if (money >= 1000) {
+				choice = prompt('콜라, 사이다, 닥터페퍼 선택 가능 !');
+				choiceResult();
+			} else if (money >= 700) {
+				choice = prompt('콜라, 사이다 선택 가능 !');
+				choiceResult();
+			} else if (money >= 500) {
+				choice = prompt('콜라 선택 가능 !');
+				choiceResult();
+			} else {
+				alert('선택할 수 있는 음료수 없음!');
+			}
+	}
+	
+	function btn1() {
+		money += 100;
+		console.log("현재 금액 : " + money + "원");
+		choiceDrink();
+	}
+	function btn2() {
+		money += 500;
+		console.log("현재 금액 : " + money + "원");
+		choiceDrink();
+	}
+	function btn3() {
+		money += 1000;
+		console.log("현재 금액 : " + money + "원");
+		choiceDrink();
+	}
+	function btn4() {
+		if (money == 0) {
+			alert("현재 있는 금액이 없습니다.");
+		} else {
+			alert("현재 있는 금액을 반환합니다.");
+		}
+		money = 0;
+		console.log("현재 금액 : " + money + "원");
+	}
+	
+</script>
+</head>
+<body>
+	<!-- <button onclick="lol();">lol</button> -->
+	
+	<div>콜라 : 500원</div>
+	<div>사이다 : 700원</div>
+	<div>닥터페퍼 : 1000원</div>
+	<div>맥주 : 2000원</div>
+	<div>소주 : 3000원</div>
+	<hr>
+	<button onclick="coin();">돈넣기</button>
+	<button onclick="btn1();">100원</button>
+	<button onclick="btn2();">500원</button>
+	<button onclick="btn3();">1000원</button>
+	<button onclick="btn4();">돈빼기</button>
+
+<!-- 
+	<table width="100%">
+		<tr>
+			<td align="center">
+				<h1>자판기</h1>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<table border="1">
+					<tr>
+						<td align="center">
+							<button onclick="add100();">100원</button>
+						</td>
+						<td align="center">
+							<button onclick="add500();">500원</button>
+						</td>
+						<td align="center">
+							<button onclick="add1000();">1000원</button><br>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">
+							<button onclick="returnMoney();">반환</button>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+-->	
+
+
+</body>
+</html>

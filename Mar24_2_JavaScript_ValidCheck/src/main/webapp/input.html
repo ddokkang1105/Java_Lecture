@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function goHahaha() {
+		// document : 이 html문서
+		let iiInput = document.getElementById("ii"); // id가 ii인 것
+		// alert(iiInput);
+		// document.getElementByClass("ii"); // class가 ii인 것 
+		// document.getElementByTagName("input"); // 특정 태그명
+		
+		let iiInputVal = iiInput.value; // 입력한 내용이 나오게 !
+		// alert(iiInputVal);
+		
+		location.href = "ㅋㅋㅋ?ii=" + iiInputVal;
+		
+	}
+
+</script>
+</head>
+<body>
+	<!-- 
+		input에 값 넣어서
+		button을 더블클릭하면 ㅋㅋㅋ?ii=XXX로 GET방식 요청
+		<form> : 입력받아서 요청할 때 필수품 - X
+		<form> : 입력받아서 요청할 때 편함 - O ***
+		
+		주소 입력				- GET
+		<a> 태그				- GET
+		<form> + <button>		- GET / POST
+		JavaScript				- GET
+	 -->
+	 
+	 <input id="ii">
+	 <button ondblclick="goHahaha();">확인</button>
+	 
+	 
+</body>
+</html>

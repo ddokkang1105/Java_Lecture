@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		파일처리
+			1) 파일이 업로드가 될 폴더 (webapp/img)
+			2) POST 방식 (주소에 데이터를 담는 GET 방식의 요청이 파일을 소화하지 못함)
+			3) 기존 시스템이 글자는 인코딩, 디코딩 전송이 가능
+							 파일은 인코딩을 할 줄 모름 !
+				-> 다른 방식(cos.jar)으로 인코딩해서 전송, 디코딩...
+				mvnrepository - cos search - com.jfinal > cos 설명있는거 - 최신거(2022.2)
+				- jar file download - cos.jar file -> WEB-INF lib 에 넣기 - 
+	 -->
+	<!-- 
+		어디론가 요청을...
+		사진의 제목 (입력) / 사진 파일 / 알집 파일 	 
+	 -->	
+	<!-- 
+		enctype="multipart/form-data" :
+			enctype : encording type
+			<form> 요소가 파일이나 이미지를 서버로 전송할 때 사용 !
+	 -->	  
+	  <form action="Output" method="post" enctype="multipart/form-data">
+	  	사진의 제목 : <input name="title"><br>
+	  	사진 파일 : <input type="file" name="image"><br>
+	  	기타 파일 : <input type="file" name="etc"><br>
+	  	<input type="submit" value="Submit">
+	  </form>
+	  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

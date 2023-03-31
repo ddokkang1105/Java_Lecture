@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function checkValid() {
+		let idInput = document.ff.idd; // document.form이름.input이름
+		let pwInput = document.ff.pwpw;
+		let pwchkInput = document.ff.pwchk;
+		let footInput = document.ff.foot;
+		
+		// 필수 검사
+		if (!idInput.value) {
+			alert('No ID !!');
+			idInput.focus();		// 커서 갖다놓기
+			return false;
+		} else if (idInput.value.length < 5) {
+			alert('ID is (5 ~ 10) letters.');
+			idInput.focus();
+			idInput.value="";		// 기존에 썼던 내용 지우기
+			return false;
+		}
+
+		// PW에 3, 6, 9 중에 하나 이상 & h, k 중에 하나 이상 들어가 있었으면...
+
+		if (!pwInput.value) {
+			alert('No Password !!');
+			pwInput.focus();		// 커서 갖다놓기
+			return false;
+		} else if (pwInput.value.length < 5) {
+			alert('Password is (5 ~ 10) letters.');
+			pwInput.focus();
+			pwInput.value="";		// 기존에 썼던 내용 지우기
+			return false;
+		} else if ((pwInput.value.indexOf("3") || pwInput.value.indexOf("6") || 
+			pwInput.value.indexOf("9")) == -1) {
+			alert('Password must have (3 or 6 or 9) & (h or k)');
+			pwInput.focus();
+			pwInput.value="";		// 기존에 썼던 내용 지우기
+			return false;
+		} else if ((pwInput.value.indexOf("h") || pwInput.value.indexOf("k")) == -1) {
+			alert('Password must have (3 or 6 or 9) & (h or k)');
+			pwInput.focus();
+			pwInput.value="";		// 기존에 썼던 내용 지우기
+			return false;
+		}
+		
+/* 		let numExist = false;
+		let num = "369";
+		
+		for (var i = 0; i < num.length; i++) {
+			if (pwInput.value.indexOf(num[i]) != -1) {	// 값이 들어있다면
+				numExist = true;
+				break;
+			}
+		}
+
+		let letterExist = false;
+		let letter = "hk";
+		
+		for (var i = 0; i < letter.length; i++) {
+			if (pwInput.value.indexOf(letter[i]) != -1) {	// 값이 들어있다면
+				letterExist = true;
+				break;
+			}
+		}
+		
+		alert(numExist);
+		alert(letterExist); // 두 조건을 만족하게 되면 둘 다 true
+		
+		// if문에서 !true = false -> 조건식 안돌아감
+		if (!numExist || !letterExist) {
+			alert(numExist);
+			alert(letterExist); // 두 조건을 만족하게 되면 둘 다 true
+			alert('No Including Word...');
+			return false;
+		}
+		
+		if (pwchkInput.value != pwInput.value) {
+			alert('Password is not same !!');
+			pwInput.focus();
+			pwInput.value="";
+			pwchkInput.value="";
+			return false;
+		} 
+ */		
+		// let s = "오늘은 금요일인데 너무 졸려요";
+		// alert(s);
+		// alert(s.length);					// 글자 수
+		// alert(s[5]);						// 6번째 위치의 값
+		// alert(s.indexOf("졸"));			// "졸"은 몇 번째 위치에 있는지
+		// alert(s.indexOf("악"));			// -1 ("악"이라는 값이 없어서 -1을 리턴)
+		// indexOf : 있으면 그 위치를 리턴, 없으면 -1을 리턴
+		// alert(s.indexOf("매우") != -1);	// "매우"가 포함되어 있는지
+		// alert(s.indexOf("요"));			// 중복됐을 때는 처음 발견한 위치 리턴
+		
+			
+		if (!footInput.value) {
+			alert('No Foot Size !!');
+			footInput.focus();		// 커서 갖다놓기
+			return false;
+		} else if (footInput.value / 2 == NaN) {
+			alert('No String');
+			return false;
+		}
+/* 		else if (typeof(footInput.value) != typeof(1)) {
+			alert('Foot Size is only Number !!');
+			footInput.focus();
+			footInput.value="";		// 기존에 썼던 내용 지우기
+			return false;
+		}
+ */		
+ 
+/*  		if (isNaN(footInput.value)) {
+			alert('No String');
+			footInput.value="";
+			footInput.focus();
+			return false;
+		}
+ */ 
+		return true;
+		
+		
+	}
+	
+</script>
+</head>
+<body>
+	<!-- 
+		<form>안에
+			ID / PW / PW확인 / 발사이즈 / 버튼
+	
+	 -->	
+	 <form action="ㅋㅋㅋㅋㅋ" name="ff" onsubmit="return checkValid();">
+		 <table>
+		 	<tr>
+		 		<td>
+		 			<table>
+						<tr align="center">
+							<td>ID</td>
+							<td align="center">
+								 <input autofocus="autofocus" maxlength="10" name="idd">
+							</td>
+						</tr>
+						<tr align="center">
+							<td>PW</td>
+							<td><input name="pwpw"></td>
+						</tr>	 			
+						<tr align="center">
+							<td>PW Check</td>
+							<td><input maxlength="10" name="pwchk"></td>
+						</tr>	 			
+						<tr align="center">
+							<td>Foot Size</td>
+							<td><input name="foot"></td>
+						</tr>	 			
+						<tr align="center">
+							<td colspan="2" align="center"><button>Submit</button></td>
+						</tr>	 			
+		 			</table>
+		 		</td>
+		 	</tr>
+		 </table>
+	 </form>
+	 
+	 
+	 
+</body>
+</html>
