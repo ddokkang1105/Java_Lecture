@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<a href="Calculator?x=10&y=5">10, 5 계산하기</a>
+	<hr>
+	
+	<!-- 
+		form : form 내부에 있는 button을 누르면
+				action 자리에 쓴 쪽으로 요청을 해줌
+				
+		form 내부에 있는 input들의 속성값으로 name을 줘서 -> 요청 파라미터명
+		input들 안에 쓴 내용을 값으로 보내줌
+		
+		input 입력시
+			tab키 : 다음 input으로 넘어가기
+			enter키 : button을 누른 셈 쳐줌
+	
+	 -->
+	
+	<form action="Calculator">
+		
+		x : <input name="x"> <br>
+		y : <input name="y"> <p>
+		<button>계산</button>
+	
+	</form>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

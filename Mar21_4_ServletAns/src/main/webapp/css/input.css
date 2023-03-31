@@ -1,0 +1,99 @@
+@charset "EUC-KR";
+
+@font-face {
+	font-family: "Dovemayo";
+	src: url("Dovemayo.ttf");
+}
+
+#joinTbl {
+	margin-left: auto;
+	margin-right: auto;
+	background-color: fuchsia;
+	font-family: "Dovemayo";
+	font-size: 15pt;
+	border-radius: 8px;
+	box-shadow: purple 3px 5px 5px;
+	color: white;
+}
+
+#joinTbl .joinTd {
+	font-size: 25pt;
+	font-weight: 700;
+	text-shadow: black 3px 5px 5px;
+}
+
+#joinTbl .td1 {
+	margin-bottom: 10px;
+}
+
+#joinTbl .textType {
+	margin-bottom: auto;
+	outline: none;
+	text-align: center;
+	border: black solid 3px;
+	border-radius: 8px;
+	background-color: transparent;
+	color: white;
+	font-size: 13pt;
+	font-weight: 300;
+	font-family: "Dovemayo";
+}
+
+#joinTbl .textType:focus {
+	border-bottom: black dashed 3px;
+	font-size: 13pt;
+	font-family: "Dovemayo";
+}
+
+#joinTbl .textType::placeholder {
+	color: white;
+}
+
+#joinTbl button {
+	border: none;
+	background-color: transparent;
+	color: white;
+	font-size: 15pt;
+	font-family: "Dovemayo";
+	cursor: pointer;
+}
+
+#joinTbl button:hover {
+	text-decoration: underline;
+	font-family: "Dovemayo";
+	color: black;
+}
+
+#joinTbl select {
+	border: none;
+	background-color: transparent;
+	font-size: 15pt;
+	font-family: "Dovemayo";
+	outline: none;
+	width: 85%;
+	padding-left: 20px;
+	color: white;
+}
+
+#joinTbl textArea {
+	resize: none;
+	background-color: transparent;
+	border: black solid 3px;
+	border-radius: 10px;
+	width: 80%;
+	height: 70px;
+	outline: none;
+	font-family: "Dovemayo";
+	font-size: 13pt;
+	color: white;
+}
+
+#joinTbl .radioTd {
+	color: black;
+	height: 30px;
+}
+
+
+
+
+
