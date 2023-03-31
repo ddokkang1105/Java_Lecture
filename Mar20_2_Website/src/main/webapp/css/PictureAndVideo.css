@@ -1,0 +1,42 @@
+@charset "EUC-KR";
+
+.videoGif {
+	float: left;
+	border: silver solid 3px;
+	border-radius: 10px;
+	margin: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	font-family: "Dovemayo";
+	font-size: 20pt;
+	box-shadow: teal 3px 3px 5px;
+	text-align: center;
+}
+
+.videoGif img {
+	max-width: 300px;
+	max-height: 190px;
+	margin-top: 20px;
+	box-shadow: teal 3px 3px 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

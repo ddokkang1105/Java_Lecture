@@ -1,0 +1,41 @@
+@charset "EUC-KR";
+
+#boardTbl {
+	width: 990px;
+	background-color: #FFCC0060;
+	color: black;
+	font-family: "Dovemayo";
+	font-size: 20pt;
+	border-spacing: 0px;
+}
+
+#boardTbl .dataTr {
+	background-color: white;
+	color: pink;
+	height: 40px;
+	cursor: pointer;
+}
+
+#boardTbl th {
+	height: 60px;
+	font-size: 20pt;
+}
+
+#boardTbl td {
+	text-align: center;	
+	width: 33%;
+	border-bottom: 2px solid #444444;;
+}
+
+
+#boardTbl .dataTr:hover {
+	background-color: #990033;	
+}
+
+
+#boardTbl .dataTr td {
+	text-align: center;
+}
+
+
+

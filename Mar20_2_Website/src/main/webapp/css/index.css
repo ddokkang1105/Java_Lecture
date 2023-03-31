@@ -1,0 +1,92 @@
+@charset "EUC-KR";
+@font-face {
+	/* 
+		폰트 등록
+			CSS에 추가 (IE에서는 안먹힘 - ?!?!?!?)
+			
+			폰트파일에 있는 글자들 모양을 다 등록
+				=> 용량이 커집니다 !
+					=> 느림 ... !!
+	*/
+	font-family: "Dovemayo";
+	src:url("Dovemayo.ttf");
+	
+}
+
+::-webkit_scrollbar {
+	display: none;
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	/* html 기본 여백 없애기 */
+}
+
+
+#siteTitleArea {
+	border-spacing: 0px;	/* td간의 간격 */
+	position: fixed;
+	top: 0px;
+	left: 0px; /* 좌표 조절 */
+	width: 100%;	
+	font-family: "Dovemayo";
+}
+
+#siteMenuArea {
+	font-size: 30pt;
+	background-color: #99CCFF;
+}
+
+#siteMenuArea table {
+	width: 100%;
+}
+
+#siteMenuArea td {
+	width: 25%;
+	text-align: center;
+}
+
+#siteMenuArea a {
+	text-decoration: none;
+	color: teal;
+	font-weight: 500;
+	
+	/* 애니메이션 효과 */
+	/* 속성명 시간 (ease-in / ease-out) */
+	transition: all 0.5s ease-in;
+}
+
+#siteMenuArea a:hover {
+	font-size: 40pt;
+	text-shadow: yellow 0px 0px 10px;
+	text-decoration: underline;
+}
+
+#siteMenuArea a:active {
+	color: blue;
+}
+
+#siteTitle {
+	background-color: black;
+	font-size: 30pt;
+	color: white;
+	width: 1000px;
+	text-align: center;
+}
+
+#siteContentArea {
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto; /* 가운데 정렬 */
+	margin-top: 200px;
+}
+
+
+#messiMainVideo {
+	box-shadow: black 5px 5px 10px;
+	max-width: 50%;
+}
+
+
+

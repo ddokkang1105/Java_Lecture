@@ -1,0 +1,31 @@
+@charset "EUC-KR";
+
+.aguest {
+	width: 700px;
+	border: black solid 5px;
+	border-radius: 10px;
+	font-family: "Dovemayo";
+	font-size: 15pt;
+}
+
+.imgTd{
+	width: 150px;
+	padding: 10px;
+	
+}
+
+.aguest img {
+	max-width: 150px;
+	border-radius: 30px;
+}
+
+.textTd {
+	font-family: "Dovemayo";
+
+	max-width: 500px;
+	vertical-align: top;
+	overflow: hidden; 		/* max-width를 벗어나는 내용을 숨길 때 */
+	white-space: nowrap; 	/* 벗어나는 내용들 범위와 상관없이 한 줄로 표시 (가로스크롤) */
+	text-overflow: ellipsis;/* 이거 추가하면 끝에 잘리는 부분을 ...으로 처리 */
+	
+}
