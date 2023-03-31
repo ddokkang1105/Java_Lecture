@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/DdokkangValidChecker.js"></script>
+<script type="text/javascript" src="js/M2.js"></script>
+<link rel="stylesheet" href="css/V3.css">
+</head>
+<body>
+	<form action="C" method="post" enctype="multipart/form-data" name="bmi" onsubmit="return checkValid();">
+		<table>
+			<tr>
+				<td align="center" colspan="2">
+					<h1>CHECK BMI</h1>
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					Name
+				</td>
+				<td>
+					<input autocomplete="off" autofocus="autofocus" name="name"><br>
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					Height
+				</td>
+				<td>
+					<input autocomplete="off" name="height"><br>
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					Weight
+				</td>
+				<td>
+					<input autocomplete="off" name="weight"><br>
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					Image
+				</td>
+				<td>
+					<input type="file" name="image">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><button>Submit</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

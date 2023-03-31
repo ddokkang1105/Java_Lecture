@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		input 3개 => 이름 / x / y (정수) => 버튼을 누르면
+		j4_Output.jsp로 요청(Get)
+		
+		이름 / x, y, x + y 값 출력
+	
+	 -->
+	 
+	 <form action="j4_Output.jsp" method="get">
+		 Name : <input autofocus="autofocus" placeholder="Name" autocomplete="none" name="name"><br>
+		 X : <input placeholder="Input Integer" autocomplete="none" name="x"><br>
+		 Y : <input placeholder="Input Integer" autocomplete="none" name="y"><br>
+		 <button>Submit</button>
+	 </form>
+</body>
+</html>

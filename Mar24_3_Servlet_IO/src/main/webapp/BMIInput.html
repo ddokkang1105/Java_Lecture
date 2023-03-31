@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/DdokkangValidChecker.js"></script>
+<script type="text/javascript" src="js/Mar24_Check.js"></script>
+</head>
+<body>
+	<!-- 
+		table + form 활용
+		BMI 검사
+		이름 키 몸무게 + 사진 => 유효성 검사
+		
+			=> 그 정보를 가지고 계산을 해서 결과를 출력... => Servlet !
+	 -->
+
+	 <form action="Output.jsp" method="post" enctype="multipart/form-data" name="bmi" onsubmit="return bmiTest();">
+		 <table>
+		 	<tr>
+		 		<td>
+		 			<table>
+		 				<tr>
+							<td>BMI Test</td>		 				
+		 				</tr>
+		 				<tr>
+		 					<td>Name</td>
+		 					<td><input autofocus="autofocus" maxlength="10" name="name" placeholder="Only English, 3 - 10 Letters"></td>
+		 				</tr>
+		 				<tr>
+		 					<td>Height</td>
+		 					<td><input maxlength="5" name="height" placeholder="XXX.XX CM"></td>
+		 				</tr>
+		 				<tr>
+		 					<td>Weight</td>
+		 					<td><input maxlength="5" name="weight" placeholder="XX.XX KG"></td>
+		 				</tr>
+		 				<tr>
+		 					<td>Image</td>
+		 					<td><input type="file" name="image"></td>
+		 				</tr>
+		 				<tr>
+		 					<td colspan="2" align="center"><input type="submit" value="Submit"></td>
+		 				</tr>
+		 			</table>
+		 		</td>
+		 	</tr>
+		 </table>
+	 </form>
+	 
+</body>
+</html>

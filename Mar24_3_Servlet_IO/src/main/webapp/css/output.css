@@ -1,0 +1,42 @@
+@charset "EUC-KR";
+
+@font-face {
+	font-family: "Dovemayo";
+	src: url("Dovemayo.trf");
+}
+
+#BmiTbl {
+	width: 50%;
+	margin-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: black;
+	color:white;
+	font-family: "Dovemayo";
+	font-size: 20pt;
+	border-radius: 10px;
+}
+
+#BmiTbl .title {
+	font-size: 50pt;
+	font-weight: 700;
+	text-shadow: teal 3px 3px 5px;
+}
+
+#BmiTbl .td1 {
+	font-size: 30pt;
+	text-shadow: red 3px 3px 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

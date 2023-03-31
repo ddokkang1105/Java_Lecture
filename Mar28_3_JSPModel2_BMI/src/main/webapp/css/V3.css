@@ -1,0 +1,11 @@
+@charset "EUC-KR";
+
+font-face {
+	font-family: "Dovemayo";
+	src : url("Dovemayo.ttf");
+}
+
+body {
+	background-color: black;
+	color: white;
+}
