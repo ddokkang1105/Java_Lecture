@@ -1,0 +1,47 @@
+@charset "EUC-KR";
+
+#registArea {
+  width: 500px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px auto;
+  background-color: #f8f8f8;
+  font-size: 18pt;
+}
+
+#registArea td {
+  padding: 5px;
+}
+
+#registArea a {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+#contentApple {
+  border-collapse: collapse;
+  margin: 20px auto;
+  width:60%;
+  height:200pt;
+  background-color:#9c9494;
+}
+
+#contentApple td {
+  border: 1px solid #b3a8a8;
+  padding: 8px;
+}
+
+#contentApple tr:nth-child(even) {
+  background-color: #d7d7d7;
+}
+
