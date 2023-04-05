@@ -7,8 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="" name="apple" onsubmit="return AppleValid();">
-		<table>
+	<button class="deleteButton" onclick="deleteApple('${apple.a_loc}');">Delete</button>
+	<button class="backButton" onclick="back();">Back</button>
+	<form action="AppleDetailController" method="post" name="apple" onsubmit="return AppleValid();">
+		<table id="detailArea">
 			<tr>
 				<td align="left" class="td1">Location : </td>
 				<td class="td2"><input readonly="readonly" autocomplete="off" name="a_loc" value="${apple.a_loc }"></td>
@@ -32,7 +34,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><button>Submit</button></td>
+				<td colspan="2" align="center"><button class="submitButton">Submit</button></td>
 			</tr>
 		</table>
 	</form>

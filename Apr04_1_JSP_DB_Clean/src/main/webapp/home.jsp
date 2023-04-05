@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="css/home.css">
 <link rel="stylesheet" href="css/apple.css">
 <link rel="stylesheet" href="css/regist.css">
+<link rel="stylesheet" href="css/detail.css">
 </head>
 <body>
 	<table id="mainArea">

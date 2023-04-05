@@ -14,7 +14,7 @@
 		<table id="registArea">
 			<tr>
 				<td align="right">${r } Regist Apple</td>
-				<td align="center"><a href="RegistController">Click</a></td>
+				<td align="right"><a href="RegistController">Click</a></td>
 			</tr>
 		</table>
 		<table id="contentApple">

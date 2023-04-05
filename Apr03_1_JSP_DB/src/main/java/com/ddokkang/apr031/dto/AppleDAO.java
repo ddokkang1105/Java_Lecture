@@ -72,7 +72,7 @@ public class AppleDAO {
 			String location = request.getParameter("a_loc");
 			String color = request.getParameter("a_color");
 			String taste = request.getParameter("a_taste");
-			int price = Integer.parseInt(request.getParameter("a_loc"));
+			int price = Integer.parseInt(request.getParameter("a_price"));
 			
 			// <textArea>에서 엔터친거 : \r\n
 			// 웹페이지에서 줄바꾸기 : <br>
@@ -226,6 +226,144 @@ public class AppleDAO {
 		
 	}
 	
+	public boolean update(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DdokkangDBManager.connect("ddokkangPool");
+			
+			request.setCharacterEncoding("EUC-KR");
+			String loc = request.getParameter("a_loc");
+			String color = request.getParameter("a_color");
+			String taste = request.getParameter("a_taste");
+			int price = Integer.parseInt(request.getParameter("a_price"));
+			String intro = request.getParameter("a_intro").replace("\r\n", "<br>");
+			
+			String sql = "update apple set "
+					+ "a_color=?, a_taste=?, a_price=?, a_intro=? "
+					+ "where a_loc=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, color);
+			pstmt.setString(2, taste);
+			pstmt.setInt(3, price);
+			pstmt.setString(4, intro);
+			pstmt.setString(5, loc);
+			
+			if (pstmt.executeUpdate() == 1) {
+				request.setAttribute("r", "[Change Successful !]");
+				return true;
+			} else {
+				request.setAttribute("r", "[Change Failed !]");
+				return false;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("r", "[Change Failed !]");
+			return false;
+		} finally {
+			DdokkangDBManager.close(con, pstmt, null);
+		}
+	}
+	
+	public void delete(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DdokkangDBManager.connect("ddokkangPool");
+			
+			String loc = request.getParameter("a_loc");
+			
+			String sql = "delete from apple where a_loc=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, loc);
+			
+			if (pstmt.executeUpdate() == 1) {
+				request.setAttribute("r", "[Delete Successful !]");
+				allAppleCount--;
+			} else {
+				request.setAttribute("r", "[Delete Failed !]");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("r", "[Delete Failed !]");
+		}
+		DdokkangDBManager.close(con, pstmt, null);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public void deleteApple(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DdokkangDBManager.connect("ddokkangPool");
+			
+			String loc = request.getParameter("a_loc");
+			System.out.println(loc);
+			
+//			String sql = "delete apple where a_loc=?";
+			String sql = "delete from apple where a_loc=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, loc);
+			
+			if (pstmt.executeUpdate() == 1) {
+				request.setAttribute("r", "[Delete Successful !]");
+				allAppleCount--;
+			} else {
+				request.setAttribute("r", "[Delete Failed !]");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("r", "[Delete Failed !]");
+		} finally {
+			DdokkangDBManager.close(con, pstmt, null);
+		}
+		
+	}
+	
+//	public boolean deleteApple(HttpServletRequest request) {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		
+//		try {
+//			con = DdokkangDBManager.connect("ddokkangPool");
+//			
+//			String loc = request.getParameter("a_loc");
+//			System.out.println(loc);
+//			
+////			String sql = "delete apple where a_loc=?";
+//			String sql = "delete from apple where a_loc=?";
+//			pstmt = con.prepareStatement(sql);
+//			pstmt.setString(1, loc);
+//			
+//			if (pstmt.executeUpdate() == 1) {
+//				request.setAttribute("r", "[Delete Successful !]");
+//				allAppleCount--;
+//				return true;
+//			} else {
+//				request.setAttribute("r", "[Delete Failed !]");
+//				return false;
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			request.setAttribute("r", "[Delete Failed !]");
+//			return false;
+//		} finally {
+//			DdokkangDBManager.close(con, pstmt, null);
+//		}
+//		
+//	}
 	
 	
 	
@@ -236,6 +374,49 @@ public class AppleDAO {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public void changeApple(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DdokkangDBManager.connect("ddokkangPool");
+			
+			AppleAns apple = new AppleAns();
+			apple.setA_loc(request.getParameter("a_loc"));
+			apple.setA_color(request.getParameter("a_color"));
+			apple.setA_taste(request.getParameter("a_taste"));
+			apple.setA_price(Integer.parseInt(request.getParameter("a_price")));
+			apple.setA_intro(request.getParameter("a_intro"));
+			
+			String sql = "update apple "
+					+ "set a_color = ?, a_taste = ?, a_price = ?, a_intro = ? "
+					+ "where a_loc = ? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, apple.getA_color().toUpperCase());
+			pstmt.setString(2, apple.getA_taste().toUpperCase());
+			pstmt.setInt(3, apple.getA_price());
+			pstmt.setString(4, apple.getA_intro());
+			pstmt.setString(5, apple.getA_loc());
+			
+			if (pstmt.executeUpdate() >= 1) {
+				request.setAttribute("r", "[Change Successful !]");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("r", "[Change Failed !]");
+		}
+		DdokkangDBManager.close(con, pstmt, null);
+		
+	}
 	
 	//	public void function() {
 //		Connection con = null;

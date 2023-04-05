@@ -22,7 +22,19 @@ public class AppleDetailController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		AppleDAO.getAppledao().changeApple(request);
+		AppleDAO.getAppledao().getApples(1, request);
+		request.setAttribute("content", "m1.jsp");
+		request.getRequestDispatcher("home.jsp").forward(request, response);
+		
+		// ∞≠ªÁ¥‘ «Æ¿Ã
+//		if (AppleDAO.getAppledao().update(request)) {
+//			AppleDAO.getAppledao().getApples(1, request);
+//			request.setAttribute("content", "m1.jsp");
+//		} else {
+//			request.setAttribute("content", "title.jsp");
+//		}
+//		request.getRequestDispatcher("home.jsp").forward(request, response);
 	}
 
 }

@@ -12,7 +12,7 @@
 		<table id="registArea">
 			<tr>
 				<td align="right">${r } Regist Apple</td>
-				<td align="center"><a href="RegistController">Click</a></td>
+				<td align="right"><a href="RegistController">Click</a></td>
 			</tr>
 		</table>
 		<table id="contentApple">
@@ -21,8 +21,7 @@
 				<th>가격</th>
 			</tr>
 			<c:forEach var="apple" items="${apples }">
-				<!-- onclick 들어갈 거 생각해보기 -->
-				<tr onclick="">
+				<tr onclick="goAppleDetail('${apple.a_loc}');">
 					<td align="center">${apple.a_loc }</td>
 					<td align="center">
 					<fmt:formatNumber value="${apple.a_price }" type="currency"></fmt:formatNumber>
@@ -33,7 +32,9 @@
 		<table id="pageArea">
 			<tr>
 				<td align="center">
-				<!-- for문 사용해서 페이지 번호 만들기 -->
+					<c:forEach var="p" begin="1" end="${pageCount }">
+						<a href="ApplePageController?p=${p }">${p }</a>					
+					</c:forEach>
 				</td>
 			</tr>
 		</table>

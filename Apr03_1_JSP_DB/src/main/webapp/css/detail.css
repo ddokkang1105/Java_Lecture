@@ -1,6 +1,6 @@
 @charset "EUC-KR";
 
-#appleArea {
+#detailArea {
 	font-family: "Dove";
 	width: 500px;
 	border: 1px solid #ccc;
@@ -11,17 +11,16 @@
 	font-size:40pt;
 }
 
-#appleArea td {
+#detailArea td {
 	padding: 5px;
 }
 
-#appleArea .td1 {
+#detailArea .td1 {
 	font-weight: bold;
 }
 
-#appleArea input[type="text"],
-#appleArea select,
-#appleArea textarea {
+#detailArea input[type="text"],
+#detailArea textarea {
 	padding: 5px;
  	width: 100%;
   	height: 30px;
@@ -30,7 +29,7 @@
 	resize: none;
 }
 
-#appleArea button {
+.submitButton {
 	background-color: #4CAF50;
 	border: none;
 	color: white;
@@ -42,4 +41,36 @@
 	margin: 10px;
 	cursor: pointer;
 	border-radius: 3px;
+	box-shadow: 0 0 0 2px #4CAF50;
+}
+
+
+.deleteButton {
+	background-color: #ff0000;
+	border: none;
+	color: white;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 10px;
+	cursor: pointer;
+	border-radius: 3px;
+	box-shadow: 0 0 0 2px #ff0000;
+}
+
+.backButton {
+	background-color: #400000;
+	border: none;
+	color: white;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 10px;
+	cursor: pointer;
+	border-radius: 3px;
+	box-shadow: 0 0 0 2px #400000;
 }

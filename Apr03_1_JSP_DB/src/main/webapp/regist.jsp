@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<button class="backButton" onclick="back();">Back</button>
 	<form action="RegistController" method="post" name="apple" onsubmit="return appleValid();">
 		<table id="appleArea">
 			<tr>
@@ -50,7 +51,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><button>Submit</button></td>
+				<td colspan="2" align="center"><button class="appleButton">Submit</button></td>
 			</tr>
 		</table>
 	</form>
