@@ -1,5 +1,5 @@
 tomcat install - Apache Tomcat® - Download - Tomcat 8
-- 32-bit/64-bit Windows Service Installer (pgp, sha512) - 1/80으로 변경
+- 32-bit/64-bit Windows Service Installer (pgp, sha512) - Server ...1/ HTTP/1.1... 80으로 변경
 - 윈도우에서 configure 검색후에 stopped 확인 후에 - eclipse에서 밑에 있는 창에서
 - Servers에서 새로운 서버를 topcat8.5설정 - Servers 폴더 - server.xml - 밑에 source에서 63번째 줄
 - Connector 뒤에 "URIEncoding="EUC-KR" "추가
