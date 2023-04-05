@@ -1,0 +1,18 @@
+* jsp, servlet, css, js 이후 데이터베이스 연결
+META-INF - New file - context.xml - 
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+	<Resource
+		name="ddokkangPool"
+		type="javax.sql.DataSourse"
+		driverClassName="oracle.jdbc.driver.OracleDriver"
+		factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+		username="xxx"
+		password="xxx"
+		url="jdbc:oracle:thin:@IP:1521:xe"
+		maxTotal="500"
+		maxIdle="8"
+	/>
+</Context>
