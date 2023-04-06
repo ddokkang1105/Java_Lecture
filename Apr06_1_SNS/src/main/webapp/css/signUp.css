@@ -1,0 +1,79 @@
+@charset "EUC-KR";
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  width: 400px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#titleTd {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px 5px 0 0;
+}
+
+.inputTd input {
+  display: block;
+  width: 80%;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  margin: 10px 0;
+  font-size: 16px;
+  box-sizing: border-box;
+  font-family: "Dove";
+}
+
+#submitB button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 3px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: "Dove";
+}
+
+#submitB button:hover {
+  background-color: #555;
+}
+
+.td1 {
+  font-weight: bold;
+  padding: 10px;
+  text-align: right;
+}
+
+#selectTd select {
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  margin: 10px 0;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+#photoTd input {
+  margin-top: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
