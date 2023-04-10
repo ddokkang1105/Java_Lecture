@@ -1,16 +1,21 @@
 package com.ddokkang.apr061.member;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ddokkang.apr061.board.Board;
 import com.ddokkang.db.manager.DdokkangDBManager;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -116,7 +121,7 @@ public class MemberDAO {
 				String dbPw = rs.getString("m_pw");
 				if (dbPw.equals(pw)) {
 					Member m = new Member(rs.getString("m_id"), rs.getString("m_pw"), rs.getString("m_name"), rs.getString("m_phone"),
-							rs.getDate("m_birthday"), URLDecoder.decode(rs.getString("m_photo"), "EUC-KR"));
+							rs.getDate("m_birthday"), rs.getString("m_photo"));
 					request.getSession().setAttribute("loginMember", m);
 					request.getSession().setMaxInactiveInterval(600);
 					
@@ -149,8 +154,137 @@ public class MemberDAO {
 		request.setAttribute("r", "[LogOut Success !]");
 	}
 	
+	public static void update(HttpServletRequest request) {
+		// 파일 업로드에 실패하면(파일 용량이 초과) -> 거기서 캇트 !
+		String path = null;
+		MultipartRequest mr = null;
+		Member m = (Member) request.getSession().getAttribute("loginMember");
+		String old_m_photo = m.getM_photo();
+		String new_m_photo = null;
+		
+		try {
+			path = request.getServletContext().getRealPath("img");
+			mr = new MultipartRequest(request, path, 20 * 1024 * 1024, "EUC-KR", new DefaultFileRenamePolicy());
+			
+			new_m_photo = mr.getFilesystemName("m_photo");	// 선택한 파일명
+			if (new_m_photo != null) {	// 이 있으면 (새로운 파일을 넣었다면)
+				new_m_photo = URLEncoder.encode(new_m_photo, "EUC-KR").replace("+", " ");
+			} else {	// 이 없으면 (새로운 파일을 안넣었다면)
+				new_m_photo = old_m_photo;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("파일 용량...");
+			return;
+		}
+		
+		// 여기까지 진행하는데 별 일 없었다 !
+		
+		// 파일 사이즈가 20MB 적은걸로 잘 선택해서 - 파일 업로드 성공
+		// 파일 선택 안해서 (0MB)
+		
+		// 파일 선택을 했다 : 프사 바꾸겠다 -> 새 프사 파일명을 DB에 넣어야
+		//					-> 새 프사 파일명을 확보
+		// 기존 프사 파일 삭제도 해야 -> 원래 프사 파일명을 확보 !
+		
+		// 파일 선택을 안하면 : 프사 안 바꾸겠다 -> 기존 프사 파일명을 DB에 넣어야
+		//					-> 원래 프사 파일명을 확보
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DdokkangDBManager.connect("ddokkangPool");
+			
+			String id = mr.getParameter("m_id");
+			String pw = mr.getParameter("m_pw");
+			String name = mr.getParameter("m_name");
+			String phone = mr.getParameter("m_phone");
+			String m_y = mr.getParameter("m_y");
+			int m_m = Integer.parseInt(mr.getParameter("m_m"));
+			int m_d = Integer.parseInt(mr.getParameter("m_d"));
+			String birthday = String.format("%s%02d%02d", m_y, m_m, m_d);
+			
+			String sql = "update sns set m_pw=?, m_name=?, m_phone=?, "
+					+ "m_birthday=to_date(?, 'YYYYMMDD'), m_photo=? "
+					+ "where m_id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pw);
+			pstmt.setString(2, name);
+			pstmt.setString(3, phone);
+			pstmt.setString(4, birthday);
+			pstmt.setString(5, new_m_photo);
+			pstmt.setString(6, id);
+			
+			if (pstmt.executeUpdate() == 1) {
+				request.setAttribute("r", "[Change Success !]");
+				if (!new_m_photo.equals(old_m_photo)) {
+					// 기존 사진파일 지우기
+					new File(path + "/" + URLDecoder.decode(old_m_photo, "EUC-KR")).delete();
+				}
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+				m = new Member(id, pw, name, phone, sdf.parse(birthday), new_m_photo);
+				request.getSession().setAttribute("loginMember", m);
+				
+			} else {
+				request.setAttribute("r", "[Change Fail !]");
+				if (!new_m_photo.equals(old_m_photo)) {	// 새로운 사진 올라간거 삭제
+					new File(path + "/" + URLDecoder.decode(new_m_photo, "EUC-KR")).delete();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("r", "[Change Fail !(DB Error)]");
+			if (!new_m_photo.equals(old_m_photo)) {	// 새로운 사진 올라간거 삭제
+				try {
+					new File(path + "/" + URLDecoder.decode(new_m_photo, "EUC-KR")).delete();
+				} catch (UnsupportedEncodingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			
+		}
+		DdokkangDBManager.close(con, pstmt, null);
+	}
 	
-	
+	public static void delete(HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DdokkangDBManager.connect("ddokkangPool");
+			Member m = (Member) request.getSession().getAttribute("loginMember");
+			String m_id = m.getM_id();
+			
+			String sql = "delete from sns where m_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			
+			if (pstmt.executeUpdate() == 1) {
+				request.setAttribute("r", "[Drop Success !]");
+				String m_photo = m.getM_photo();	// 한글처리 되어있음
+				m_photo = URLDecoder.decode(m_photo, "EUC-KR");	// 원상복귀
+				String path = request.getServletContext().getRealPath("img");
+				File f = new File(path + "/" + m_photo);
+				f.delete();
+			} else {
+				request.setAttribute("r", "[Already Drop !]");
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("r", "[Drop Fail !(DB Error)]");
+		}
+		DdokkangDBManager.close(con, pstmt, null);
+		
+		// 회원 탈퇴 + 회원 프로필 사진 지우기
+		// 세션에는 여전히 그 정보가 남아있음...
+		// DeleteMemberController 에서 처리할 것 !
+	}
 	
 	
 	
@@ -190,6 +324,68 @@ public class MemberDAO {
 	
 	
 ///////////////////////////////////////////////////////////////////////////////////	
+	
+	public static void submitBoard(HttpServletRequest request) {
+		Board board = null;
+		
+		String text = request.getParameter("b_text");
+		text.replace("\r\n", "<br>");
+	}
+	
+	public static void dropMember(HttpServletRequest request) {
+		String path = null;
+		Member m = (Member) request.getSession().getAttribute("loginMember");
+		String old_m_photo = m.getM_photo();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DdokkangDBManager.connect("ddokkangPool");
+			
+			path = request.getServletContext().getRealPath("img"); 
+			
+			String id = request.getParameter("m_id");
+			String sql = "delete from sns where m_id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			if (pstmt.executeUpdate() == 1) {
+				request.getSession().setAttribute("loginMember", null);
+				request.setAttribute("r", "[Drop Success !]");
+				new File(path + "/" + URLDecoder.decode(old_m_photo, "EUC-KR")).delete();
+			} else {
+				request.setAttribute("r", "[Drop Fail !]");
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		DdokkangDBManager.close(con, pstmt, null);
+		
+	}
+	
+	public static void changeMember(HttpServletRequest request) {
+		
+		
+		Member m = (Member) request.getSession().getAttribute("loginMember");
+//		System.out.println(m.getM_id());
+//		System.out.println(m.getM_pw());
+//		System.out.println(m.getM_name());
+//		System.out.println(m.getM_phone());
+//		System.out.println(m.getM_birthday());
+//		System.out.println(m.getM_photo());
+		
+		Date birth = m.getM_birthday();
+		SimpleDateFormat sdf = new SimpleDateFormat("MM");
+		String m_m = sdf.format(birth);
+//		System.out.println(m_y);
+		request.setAttribute("m_m", m_m);
+		
+	}
 	
 	public static void loginMember(HttpServletRequest request) {
 		Connection con = null;

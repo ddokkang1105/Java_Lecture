@@ -7,27 +7,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ddokkang.apr061.board.BoardDAO;
 import com.ddokkang.apr061.member.MemberDAO;
 
-@WebServlet("/HomeController")
-public class HomeController extends HttpServlet {
-	
-	public HomeController() {
-		BoardDAO.getBdao().countBoard();
-	}
-	
+@WebServlet("/DropController")
+public class DropController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		MemberDAO.dropMember(request);
+//		MemberDAO.loginCheck(request);
+//		request.setAttribute("content", "title.jsp");
+//		request.getRequestDispatcher("home.jsp").forward(request, response);
+		
+		if (MemberDAO.loginCheck(request)) {
+			MemberDAO.delete(request);
+		}
+		MemberDAO.logout(request);
 		MemberDAO.loginCheck(request);
 		request.setAttribute("content", "title.jsp");
 		request.getRequestDispatcher("home.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		MemberDAO.loginMember(request);
-//		MemberDAO.loginCheck(request);
-//		request.setAttribute("content", "title.jsp");
-//		request.getRequestDispatcher("home.jsp").forward(request, response);
+
 	}
 
 }

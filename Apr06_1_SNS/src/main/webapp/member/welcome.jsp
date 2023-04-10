@@ -9,13 +9,14 @@
 <body>
 	<table id="welcomeArea">
 		<tr>
-			<td align="right">${sessionScope.loginMember.m_name } Sir, WelCome !</td>
+			<td colspan="2" align="right">${sessionScope.loginMember.m_name } Sir, WelCome ! ${r }</td>
 		</tr>
 		<tr>
-			<td align="center"><img src="img/${sessionScope.loginMember.m_photo }"> </td>
+			<td colspan="2" align="center"><img src="img/${sessionScope.loginMember.m_photo }"> </td>
 		</tr>
 		<tr>
-			<td align="right"><button onclick="logout();">LogOut</button></td>
+			<td align="center"><button onclick="goChange();">Info</button></td>
+			<td align="center"><button onclick="logout();">LogOut</button></td>
 		</tr>
 	</table>
 

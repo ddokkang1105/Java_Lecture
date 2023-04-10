@@ -8,6 +8,8 @@
 <script type="text/javascript" src="js/DdokkangValidChecker.js"></script>
 <script type="text/javascript" src="js/home.js"></script>
 <script type="text/javascript" src="js/signUp.js"></script>
+<script type="text/javascript" src="js/change.js"></script>
+<script type="text/javascript" src="js/board.js"></script>
 <link rel="stylesheet" href="css/home.css">
 <link rel="stylesheet" href="css/login.css">
 <link rel="stylesheet" href="css/signUp.css">
@@ -25,7 +27,7 @@
 		<tr>
 			<td align="center">
 				<table id="boardArea">
-					<tr><td align="center"><a href="HomeController">Board</a></td></tr>
+					<tr><td align="center"><a href="BoardController">Board</a></td></tr>
 				</table>
 			</td>
 		</tr>

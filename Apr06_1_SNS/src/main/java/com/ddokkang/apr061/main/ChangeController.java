@@ -7,27 +7,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ddokkang.apr061.board.BoardDAO;
 import com.ddokkang.apr061.member.MemberDAO;
 
-@WebServlet("/HomeController")
-public class HomeController extends HttpServlet {
-	
-	public HomeController() {
-		BoardDAO.getBdao().countBoard();
-	}
-	
+@WebServlet("/ChangeController")
+public class ChangeController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberDAO.loginCheck(request);
-		request.setAttribute("content", "title.jsp");
+		if (MemberDAO.loginCheck(request)) {
+			MemberDAO.update(request);
+			DataManager.getCurYear(request);
+			request.setAttribute("lp", "");
+			request.setAttribute("content", "change.jsp");
+		} else {
+			request.setAttribute("content", "title.jsp");
+		}
 		request.getRequestDispatcher("home.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		MemberDAO.loginMember(request);
-//		MemberDAO.loginCheck(request);
-//		request.setAttribute("content", "title.jsp");
-//		request.getRequestDispatcher("home.jsp").forward(request, response);
+		if (MemberDAO.loginCheck(request)) {
+			MemberDAO.update(request);
+			DataManager.getCurYear(request);
+			request.setAttribute("content", "");
+		} else {
+			request.setAttribute("content", "title.jsp");
+		}
+		request.getRequestDispatcher("home.jsp").forward(request, response);
 	}
 
 }
