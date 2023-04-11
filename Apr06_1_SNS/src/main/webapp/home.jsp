@@ -20,7 +20,7 @@
 		<tr>
 			<td align="center">
 				<table id="titleArea">
-					<tr><td align="center">Title</td></tr>
+					<tr onclick="goHome();"><td align="center">Title</td></tr>
 				</table>
 			</td>
 		</tr>
@@ -28,16 +28,17 @@
 			<td align="center">
 				<table id="boardArea">
 					<tr><td align="center"><a href="BoardController">Board</a></td></tr>
+					<tr><td align="right">${r }</td></tr>
 				</table>
 			</td>
 		</tr>
 		<tr>
-			<td align="right">
+			<td align="right" id="lpTd">
 				<jsp:include page="${lp }" />
 			</td>
 		</tr>
 		<tr>
-			<td align="center" >
+			<td align="center" id="conTd">
 				<table id="contentArea">
 					<tr>
 						<td align="center" class="contentTd">

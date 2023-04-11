@@ -1,4 +1,4 @@
-package com.ddokkang.apr061.main;
+package com.ddokkang.apr061.board;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,24 +7,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ddokkang.apr061.board.BoardDAO;
+import com.ddokkang.apr061.main.TokenManager;
 import com.ddokkang.apr061.member.MemberDAO;
 
-@WebServlet("/HomeController")
-public class HomeController extends HttpServlet {
-	
-	public HomeController() {
-		BoardDAO.getBdao().countBoard();
-	}
-	
+@WebServlet("/BoardSearchController")
+public class BoardSearchController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberDAO.loginCheck(request);
-		request.setAttribute("content", "title.jsp");
+		if (MemberDAO.loginCheck(request)) {
+			request.setAttribute("lp", "");
+		}
+		TokenManager.make(request);
+		BoardDAO.getBdao().searchBoard(request);
+		request.setAttribute("content", "board.jsp");
 		request.getRequestDispatcher("home.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 	}
 
 }

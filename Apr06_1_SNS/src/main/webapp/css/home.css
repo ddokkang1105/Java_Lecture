@@ -9,6 +9,11 @@ body {
 	margin: 0;
 }
 
+img {
+	width : 300px;
+	height: 300px;
+}
+
 #mainArea {
 	width: 100%;
 	font-family: "Dove";

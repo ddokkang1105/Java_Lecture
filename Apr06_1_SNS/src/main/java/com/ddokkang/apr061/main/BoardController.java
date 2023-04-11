@@ -13,7 +13,10 @@ import com.ddokkang.apr061.member.MemberDAO;
 @WebServlet("/BoardController")
 public class BoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberDAO.loginCheck(request);
+		if (MemberDAO.loginCheck(request)) {
+			request.setAttribute("lp", "");
+		}
+		;
 		TokenManager.make(request);
 		BoardDAO.getBdao().getBoardByPage(1, request);
 		request.setAttribute("content", "board.jsp");

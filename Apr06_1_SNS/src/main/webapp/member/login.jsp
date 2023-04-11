@@ -11,8 +11,7 @@
 	<form action="LoginController" method="post" name="login" onsubmit="return loginValid();">
 		<table id="loginArea">
 			<tr>
-				<td align="right" class="loginTd">Login</td>
-				<td align="right" class="resultTd">${r }</td>			
+				<td colspan="2" align="center" class="loginTd">Login</td>
 			</tr>
 			<tr>
 				<td class="td1">ID</td> 

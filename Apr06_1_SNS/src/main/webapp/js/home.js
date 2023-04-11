@@ -28,3 +28,7 @@ function logout() {
 		location.href = "LoginController";
 	}	
 }
+
+function goHome() {
+	location.href = "HomeController";
+}

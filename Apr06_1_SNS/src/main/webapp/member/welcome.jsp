@@ -9,7 +9,7 @@
 <body>
 	<table id="welcomeArea">
 		<tr>
-			<td colspan="2" align="right">${sessionScope.loginMember.m_name } Sir, WelCome ! ${r }</td>
+			<td colspan="2" align="right">${sessionScope.loginMember.m_name } Sir, WelCome ! </td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center"><img src="img/${sessionScope.loginMember.m_photo }"> </td>

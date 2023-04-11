@@ -17,6 +17,7 @@ public class BoardWriteController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (MemberDAO.loginCheck(request)) {
 			BoardDAO.getBdao().write(request);
+			request.setAttribute("lp", "");
 		}
 		TokenManager.make(request);
 		BoardDAO.getBdao().getBoardByPage(1, request);
