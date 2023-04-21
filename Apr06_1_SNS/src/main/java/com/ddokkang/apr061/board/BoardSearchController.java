@@ -17,7 +17,8 @@ public class BoardSearchController extends HttpServlet {
 			request.setAttribute("lp", "");
 		}
 		TokenManager.make(request);
-		BoardDAO.getBdao().searchBoard(request);
+		BoardDAO.getBdao().searchBoardMsg(request);
+		BoardDAO.getBdao().getBoardMsgByPage(1, request);
 		request.setAttribute("content", "board.jsp");
 		request.getRequestDispatcher("home.jsp").forward(request, response);
 	}

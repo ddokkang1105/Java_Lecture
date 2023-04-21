@@ -15,8 +15,8 @@ function right(no, end) {
 	
 }
 
-function edit(b_no) {
-	let b_text = prompt('Input Text You Wanna Edit !');
+function edit(b_no, b_text) {
+	b_text = prompt('Input Text You Wanna Edit !', b_text);
 	if (b_text != null) {
 		location.href = "BoardEditController?b_no=" + b_no + "&b_text=" + b_text;
 	}

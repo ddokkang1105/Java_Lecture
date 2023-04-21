@@ -18,7 +18,7 @@ public class BoardDeleteController extends HttpServlet {
 			BoardDAO.getBdao().deleteBoard(request);
 		}
 		TokenManager.make(request);
-		BoardDAO.getBdao().getBoardByPage(1, request);
+		BoardDAO.getBdao().getBoardMsgByPage(1, request);
 		request.setAttribute("content", "board.jsp");
 		request.getRequestDispatcher("home.jsp").forward(request, response);
 	}

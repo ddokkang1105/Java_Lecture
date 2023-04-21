@@ -48,13 +48,13 @@
 			</tr>
 			<c:if test="${sessionScope.loginMember.m_id == board.b_writer }">
 				<tr>
-						<td align="right"><button onclick="edit(${board.b_no });">Edit</button></td>
+						<td align="right"><button onclick="edit(${board.b_no }, '${board.b_text }');">Edit</button></td>
 						<td align="right"><button onclick="deleteB(${board.b_no })">Delete</button></td>
 				</tr>
 			</c:if>
 		</c:forEach>
 		<!-- 검색할 때 나오는 창 -->
-		<c:forEach var="s_b" items="${s_board }">
+<%-- 		<c:forEach var="s_b" items="${s_board }">
 			<tr>
 				<td align="center">
 					${s_b.b_no }
@@ -65,7 +65,7 @@
 					<!-- 내용(버튼은 onclick으로, 기본은 1페이지, 파라미터로 넘기기) -->
 				</td>
 			</tr>
-		</c:forEach>
+		</c:forEach> --%>
 		<tr>
 			<td align="left"><button onclick="left(${pageNo }, ${startPage });">&lt;</button></td>
 			<td align="right"><button onclick="right(${pageNo }, ${endPage });">&gt;</button></td>

@@ -18,7 +18,7 @@ public class BoardPageController extends HttpServlet {
 		}
 		TokenManager.make(request);
 		int p = Integer.parseInt(request.getParameter("p"));
-		BoardDAO.getBdao().getBoardByPage(p, request);
+		BoardDAO.getBdao().getBoardMsgByPage(p, request);
 		request.setAttribute("content", "board.jsp");
 		request.getRequestDispatcher("home.jsp").forward(request, response);
 	}

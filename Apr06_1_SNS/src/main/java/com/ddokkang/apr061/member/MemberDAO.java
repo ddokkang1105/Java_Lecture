@@ -8,14 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ddokkang.apr061.board.Board;
 import com.ddokkang.db.manager.DdokkangDBManager;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -125,7 +123,7 @@ public class MemberDAO {
 					request.getSession().setAttribute("loginMember", m);
 					request.getSession().setMaxInactiveInterval(600);
 					
-					Cookie c = new Cookie("lastLogin", id);
+					Cookie c = new Cookie("lastLoginId", id);
 					c.setMaxAge(60 * 60 * 24 * 5);
 					response.addCookie(c);
 					request.setAttribute("r", "[Login Success !]");
@@ -326,7 +324,7 @@ public class MemberDAO {
 ///////////////////////////////////////////////////////////////////////////////////	
 	
 	public static void submitBoard(HttpServletRequest request) {
-		Board board = null;
+//		Board board = null;
 		
 		String text = request.getParameter("b_text");
 		text.replace("\r\n", "<br>");
@@ -465,9 +463,9 @@ public class MemberDAO {
 //			mem.setM_birthday(mr.getParameter("m_birthday_y"));
 			mem.setM_photo(URLEncoder.encode(mr.getFilesystemName("m_photo"), "EUC-KR").replace("+", " "));
 			
-			String b_y = mr.getParameter("m_y");
-			String b_m = mr.getParameter("m_m");
-			String b_d = mr.getParameter("m_d");
+//			String b_y = mr.getParameter("m_y");
+//			String b_m = mr.getParameter("m_m");
+//			String b_d = mr.getParameter("m_d");
 			
 //			System.out.println(b_y);
 //			System.out.println(b_m);

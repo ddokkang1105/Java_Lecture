@@ -18,7 +18,8 @@ public class BoardController extends HttpServlet {
 		}
 		;
 		TokenManager.make(request);
-		BoardDAO.getBdao().getBoardByPage(1, request);
+		BoardDAO.getBdao().clearSearch(request);
+		BoardDAO.getBdao().getBoardMsgByPage(1, request);
 		request.setAttribute("content", "board.jsp");
 		request.getRequestDispatcher("home.jsp").forward(request, response);
 	}

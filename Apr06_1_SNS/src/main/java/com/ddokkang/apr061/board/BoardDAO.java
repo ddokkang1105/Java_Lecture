@@ -28,6 +28,113 @@ public class BoardDAO {
 	// 그 글의 작성자만 내용을 수정하거나 / 삭제
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
+	// 원래 있던 내용에서 검색에 대한 페이징이 없어서 그거에 대한 코드 추가
+	
+	// "s_board"를 세션으로 만들어서 검색할 때의 페이징에서 검색어를 유지할 수 있게 해주고
+	// 전체 페이징하는 메소드에서 "s_board"값이 없으면 null을 설정하여 전체를 출력, 
+	// 값이 있으면 검색에 따른 count의 개수를 boardCount에 넣어서 그 개수에 따른 페이징을 할 수 있도록
+	
+	// "s_board"를 세션으로 만들기
+	public void searchBoardMsg(HttpServletRequest request) {
+		String s_board = request.getParameter("s_board");
+		request.getSession().setAttribute("s_board", s_board);
+	}
+	
+	// 게시판 처음 접근했을 때 검색어 초기화 시키기
+	public void clearSearch(HttpServletRequest request) {
+		request.getSession().setAttribute("s_board", null);
+	}
+	
+	// 검색에 따른 count(*) - Controller에서 따로 사용하지 않을 거라서 private
+	// 리턴값을 int로 설정하여 검색에 따른 count값을 반환
+	private int getSearchCount(String s_board) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DdokkangDBManager.connect("ddokkangPool");
+			
+			String sql = "select count(*) from sns, board where b_writer = m_id and b_text like '%'||?||'%'";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, s_board);
+			rs = pstmt.executeQuery();
+			rs.next();
+			return rs.getInt("count(*)");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;	// 검색어에 해당하는 게시글이 없을 때
+		} finally {
+			DdokkangDBManager.close(con, pstmt, rs);
+		}
+	}
+	
+	// 페이징하는 메소드 만들기 ! 인데 검색어의 유/무가 추가된 버전
+	public void getBoardMsgByPage(int pageNo, HttpServletRequest request) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String s_board = (String) request.getSession().getAttribute("s_board");
+			
+			int startPage = 1;
+			int endPage = boardCount;
+			if (s_board == null) {
+				s_board = "";
+			} else {
+				endPage = getSearchCount(s_board);
+			}
+			
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("pageNo", pageNo);
+			
+			con = DdokkangDBManager.connect("ddokkangPool");
+			
+			String sql = "select * "
+					+ "from ( "
+					+ 		"select rownum rn, b_no, b_writer, b_when, b_text, m_photo "
+					+ 		"from ("
+					+			"select * "
+					+ 			"from board, sns "
+														// UPPER 함수를 이용한 대/소문자 상관없이 찾기
+					+ 			"where b_writer = m_id and upper(b_text) like upper('%'||?||'%') "
+					+ 			"order by b_when "
+					+ 		") "
+					+ ") "
+					+ "where rn=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, s_board);
+			pstmt.setInt(2, pageNo);
+			
+			rs = pstmt.executeQuery();
+			
+			ArrayList<Board> board = new ArrayList<Board>();
+			Board b = null;
+			
+			while (rs.next()) {
+				b = new Board();
+				b.setB_no(rs.getInt("b_no"));
+				b.setB_writer(rs.getString("b_writer"));
+				b.setB_when(rs.getDate("b_when"));
+				b.setB_text(rs.getString("b_text"));
+				b.setM_photo(rs.getString("m_photo"));
+				board.add(b);
+			}
+			request.setAttribute("board", board);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		DdokkangDBManager.close(con, pstmt, rs);
+	}
+	
+	
+	//////////////////////////////////////////////////////////////////////////////////////////
 	public void countBoard() {
 	
 		Connection con = null;
@@ -135,6 +242,8 @@ public class BoardDAO {
 		}
 		DdokkangDBManager.close(con, pstmt, rs);
 	}
+	
+	
 	
 	public void getBoardByPage(int pageNo, HttpServletRequest request) {
 		Connection con = null;
