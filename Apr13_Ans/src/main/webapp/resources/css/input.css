@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: "Dove";
+	src: url('Dovemayo.ttf');
+}
+
+body {
+	font-family: "Dove";
+}
+
+h1 {
+	font-size: 70pt;
+}
+
+#inputNum {
+	font-family: "Dove";
+	font-size: 40pt;
+}
+
+#inputNum input {
+	font-family: "Dove";
+	font-size: 25pt;
+	border: dotted 3px;
+	size: 10px;	
+	width: 100px;
+	height: 60px;
+}
+
+#inputNum input:focus {
+	border: solid 3px;
+}
+
+select {
+	margin-bottom: 10px;
+}
+
+
+select, option {
+	font-family: "Dove";
+	font-size: 25pt;
+	border: dotted 3px;
+	width: 220px;
+}
+
+select:focus {
+	border: solid 3px;
+}
+
+button {
+	font-family: "Dove";
+	font-size: 25pt;
+	color: white;
+	background-color: black;
+	border-radius: 10pt;
+}

@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: "Dove";
+	src: url('Dovemayo.ttf');	
+}
+
+body {
+	font-family: "Dove";
+}
+
+h1 {
+	font-size: 70pt;
+}
+
+h3 {
+	font-size: 50pt;
+}
+
+.cm {
+	color: red;
+}
+
+.m2 {
+	color: green;
+}
+
+.doC {
+	color: blue;
+}
+
+.mi {
+	color: pink;
+}
+
+button {
+	font-family: "Dove";
+	font-size: 50pt;
+	background-color: yellow;
+	border: yellow;
+	border-radius: 10px;
+}
