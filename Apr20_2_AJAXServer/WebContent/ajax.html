@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+
+	// AJAX -JavaScript-> 웹브라우저
+	//	브라우저의 동일출처정책에 걸리기 때문에
+	//	AJAX은 다른사람의 것을 가져올 수 없습니다...
+	//		'동일출처정책'
+	//			: 웹과 상호작용을 하는 JavaScript 코드에 대한 '보안' 정책
+	
+	// Cross-Domain AJAX - 브라우저의 동일출처정책을 뚫어버린느 AJAX
+	//		다른사람이 만든거 가져오는 AJAX
+	
+	//		[서버측에서 다른사람에게 주고 싶다면]
+	//			1) JSONP (JSON with padding)
+	//				일부러 JSON모양을 뭉개서 JSON이 아닌것처럼 => AJAX가 아니게
+	//			2) 응답 헤더 : Access-Control-Allow-Origin 세팅
+	
+	//		[서버측에서 CrossDomain을 허용하지 않았다면... - 직접 작업을 해야...!]
+	//			3) proxy 서버
+	//				: 서버와 클라이언트 사이에 중계 기능을 해줌
+	//				=> IP주소 우회해서 사용하는 것!
+	//				AJAX로는 기상청 데이터를 가져올 수 없음
+	//				JAVA로는 가능 O
+
+	$(function() {
+		// alert('aa');
+		
+		// Error 메시지 JSON형태 데이터 전체를 여기에 alert으로 출력
+		// url 주소 : http://localhost/top-level-package/나올 주소값...
+		
+		$.getJSON("http://localhost:8082/apr201/error.getJSON", function(asd) {
+			alert(JSON.stringify(asd));
+			// alert('aaa');
+			// $.each(asd.error, function(i, e) {
+				// alert(e.e_what);
+				// alert(e.e_where);
+				// alert(e.e_what + " - " + e.e_where);
+			// })
+		});
+		
+		// http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1150060300
+		
+		$.ajax({
+			url: "http://www.kma.go.kr/wid/queryDFSRSS.jsp",
+			data: {zone : 1150060300},
+			success: function(asd) {
+				alert(asd);
+			}
+		});
+		
+		
+	});
+</script>
+</head>
+<body>
+
+</body>
+</html>

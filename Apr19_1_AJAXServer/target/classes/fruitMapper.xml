@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddokkang.apr191.fruit.FruitMapper">
+
+	<select id="getAllFruit" resultType="com.ddokkang.apr191.fruit.Fruit">
+		select * from apr19_fruit order by f_price
+	</select>
+
+	<select id="SearchFruit" resultType="com.ddokkang.apr191.fruit.Fruit"
+		parameterType="com.ddokkang.apr191.fruit.Fruit">
+		select * from apr19_fruit where f_price &lt;= #{f_price } order by f_price
+	</select>
+
+</mapper>
